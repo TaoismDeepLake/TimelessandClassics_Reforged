@@ -265,6 +265,7 @@ public enum SpecialModels
     GLOCK_18_SLIDE("glock_18_slide"),
     GLOCK_18_STANDARD_MAG("glock_18_standard_mag"),
     GLOCK_18_EXTENDED_MAG("glock_18_extended_mag"),
+    GLOCK_18_SUPPRESSOR("glock_18_suppressor"),
     M1873("m1873"),
     M1873_CYLINDER("m1873_cylinder"),
     CZ75("cz75"),
