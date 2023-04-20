@@ -39,6 +39,8 @@ public enum SpecialModels
     AK47_BOLT("ak47_bolt"),
     M60("m60"),
     M60_MAG("m60_mag"),
+    M60_STANDARD_MAG("m60_standard_mag"),
+    M60_EXTENDED_MAG("m60_extended_mag"),
     M60_CAPS("m60_caps"),
     M60_HANDLE("m60_handle"),
     AK47_OPTIC_MOUNT("ak47_mount"),
