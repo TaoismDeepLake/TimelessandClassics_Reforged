@@ -23,8 +23,8 @@
   "reloads": {
     "magFed": true,
     "maxAmmo": 75,
-    "reloadMagTimer": 110,
-    "additionalReloadEmptyMagTimer": 12,
+    "reloadMagTimer": 100,
+    "additionalReloadEmptyMagTimer": 24,
     "maxAdditionalAmmoPerOC": [25, 50, 75],
     "preReloadPauseTicks": 18,
     "openBolt": true
