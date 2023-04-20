@@ -1,0 +1,26 @@
+{
+  "type": "tac:workbench",
+  "materials": [
+    {
+      "item": {
+        "tag": "forge:ingots/iron"
+      },
+      "count": 196
+    },
+    {
+      "item": {
+        "tag": "forge:ingots/gold"
+      },
+      "count": 64
+    },
+    {
+      "item": {
+        "tag": "forge:gems/diamond"
+      },
+      "count": 16
+    }
+  ],
+  "result": {
+    "item": "tac:m82a2"
+  }
+}

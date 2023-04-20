@@ -16,7 +16,6 @@ import com.tac.guns.interfaces.IExplosionDamageable;
 import com.tac.guns.interfaces.IHeadshotBox;
 import com.tac.guns.item.GunItem;
 import com.tac.guns.item.TransitionalTypes.TimelessGunItem;
-import com.tac.guns.item.TransitionalTypes.wearables.ArmorRigItem;
 import com.tac.guns.network.PacketHandler;
 import com.tac.guns.network.message.*;
 import com.tac.guns.util.BufferUtil;
@@ -40,8 +39,6 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.server.SExplosionPacket;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.*;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.vector.Vector3d;
@@ -98,7 +95,7 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
         this.general = modifiedGun.getGeneral();
         this.projectile = modifiedGun.getProjectile();
         this.entitySize = new EntitySize(this.projectile.getSize(), this.projectile.getSize(), false);
-        this.modifiedGravity = modifiedGun.getProjectile().isGravity() ? GunModifierHelper.getModifiedProjectileGravity(weapon, -0.0285) : 0.0;
+        this.modifiedGravity = modifiedGun.getProjectile().isGravity() ? GunModifierHelper.getModifiedProjectileGravity(weapon, -0.0285) : 0.0; // -0.0285 Default upcoming new -0.0125
         this.life = GunModifierHelper.getModifiedProjectileLife(weapon, this.projectile.getLife());
         this.randomRecoilP = randP;
         this.randomRecoilY = randY;
@@ -382,7 +379,7 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
         boundingBox = boundingBox.expand(0, expandHeight, 0);
 
         Vector3d hitPos = boundingBox.rayTrace(startVec, endVec).orElse(null);
-        Vector3d grownHitPos = boundingBox.grow(Config.COMMON.gameplay.growBoundingBoxAmount.get(), 0, Config.COMMON.gameplay.growBoundingBoxAmount.get()).rayTrace(startVec, endVec).orElse(null);
+        Vector3d grownHitPos = boundingBox.grow(Config.COMMON.gameplay.growBoundingBoxAmountV2.get(), 0, Config.COMMON.gameplay.growBoundingBoxAmountV2.get()).rayTrace(startVec, endVec).orElse(null);
         if(hitPos == null && grownHitPos != null)
         {
             RayTraceResult raytraceresult = rayTraceBlocks(this.world, new RayTraceContext(startVec, grownHitPos, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, this), IGNORE_LEAVES);
@@ -407,7 +404,7 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
                     Optional<Vector3d> headshotHitPos = box.rayTrace(startVec, endVec);
                     if(!headshotHitPos.isPresent())
                     {
-                        box = box.grow(Config.COMMON.gameplay.growBoundingBoxAmount.get(), 0, Config.COMMON.gameplay.growBoundingBoxAmount.get());
+                        box = box.grow(Config.COMMON.gameplay.growBoundingBoxAmountV2.get(), 0, Config.COMMON.gameplay.growBoundingBoxAmountV2.get());
                         headshotHitPos = box.rayTrace(startVec, endVec);
                     }
                     if(headshotHitPos.isPresent() && (hitPos == null || headshotHitPos.get().distanceTo(hitPos) < 0.5))
@@ -572,9 +569,10 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
                 entity.attackEntityFrom(source, damageToMcArmor); // Apply vanilla armor aware damage
             }
 
+            entity.hurtResistantTime = 0;
             source.setDamageBypassesArmor();
             source.setDamageIsAbsolute();
-            if(!(Config.COMMON.gameplay.percentDamageIgnoresStandardArmor.get() >= 1.0))
+            if(Config.COMMON.gameplay.percentDamageIgnoresStandardArmor.get() <= 1.0)
                 entity.attackEntityFrom(source, (damage-damageToMcArmor)); // Apply pure damage
         }
         else
@@ -584,7 +582,7 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
     protected void updateWeaponLevels(float damage)
     {
         ItemStack gunStack = this.shooter.getHeldItemMainhand();
-        if(!(gunStack.getItem() instanceof GunItem))
+        if(!(gunStack.getItem() instanceof GunItem) || gunStack.getTag() == null)
             return;
         if(gunStack.getTag().get("levelDmg") != null)
         {

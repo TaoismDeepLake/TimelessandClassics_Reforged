@@ -941,6 +941,23 @@ public class GunModifiers
         }
     };
 
+    public static final IGunModifier M82A2_MOD = new IGunModifier()
+    {
+        @Override
+        public double modifyFireSoundRadius(double radius)
+        {
+            return radius * 1.75;
+        }
+        @Override
+        public double modifyAimDownSightSpeed(double speed) {
+            return speed*0.5;
+        }
+        @Override
+        public double additionalProjectileGravity() {
+            return -0.02;
+        }
+    };
+
     public static final IGunModifier GLOCK17_MOD = new IGunModifier()
     {
         @Override

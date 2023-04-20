@@ -4,6 +4,8 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.tac.guns.client.SpecialModels;
 import com.tac.guns.client.handler.GunRenderingHandler;
 import com.tac.guns.client.handler.ShootingHandler;
+import com.tac.guns.client.render.animation.Ak47AnimationController;
+import com.tac.guns.client.render.animation.DBShotgunAnimationController;
 import com.tac.guns.client.render.animation.STI2011AnimationController;
 import com.tac.guns.client.render.animation.module.AnimationMeta;
 import com.tac.guns.client.render.animation.module.GunAnimationController;
@@ -89,6 +91,57 @@ public class sti2011_animation implements IOverrideModel {
             RenderUtil.renderModel(SpecialModels.STI2011_SLIDE.getModel(), stack, matrices, renderBuffer, light, overlay);
         }
         matrices.pop();
+
+        matrices.push();
+        {
+            controller.applySpecialModelTransform(SpecialModels.STI2011_BODY.getModel(), STI2011AnimationController.INDEX_HAMMER, transformType, matrices);
+            RenderUtil.renderModel(SpecialModels.STI2011_HAMMER.getModel(), stack, matrices, renderBuffer, light, overlay);
+        }
+        matrices.pop();
+
+        matrices.push();
+        {
+            controller.applySpecialModelTransform(SpecialModels.STI2011_BODY.getModel(), STI2011AnimationController.INDEX_MAG, transformType, matrices);
+            if(EnchantmentHelper.getEnchantmentLevel(ModEnchantments.OVER_CAPACITY.get(), stack) > 0)
+            {
+                RenderUtil.renderModel(SpecialModels.STI2011_EXTENDED_MAG.getModel(), stack, matrices, renderBuffer, light, overlay);
+            }
+            else
+            {
+                RenderUtil.renderModel(SpecialModels.STI2011_STANDARD_MAG.getModel(), stack, matrices, renderBuffer, light, overlay);
+            }
+        }
+        matrices.pop();
+
+        if(controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_EMPTY).equals(controller.getPreviousAnimation()) ) {
+            matrices.push();
+            {
+                controller.applySpecialModelTransform(SpecialModels.STI2011_BODY.getModel(), STI2011AnimationController.INDEX_EXTRA_MAG, transformType, matrices);
+                if (EnchantmentHelper.getEnchantmentLevel(ModEnchantments.OVER_CAPACITY.get(), stack) > 0) {
+                    RenderUtil.renderModel(SpecialModels.STI2011_EXTENDED_MAG.getModel(), stack, matrices, renderBuffer, light, overlay);
+                } else {
+                    RenderUtil.renderModel(SpecialModels.STI2011_STANDARD_MAG.getModel(), stack, matrices, renderBuffer, light, overlay);
+                }
+            }
+            matrices.pop();
+        }
+
+        matrices.push();
+        {
+            controller.applySpecialModelTransform(SpecialModels.STI2011_BODY.getModel(), STI2011AnimationController.INDEX_BULLET1,transformType,matrices);
+            RenderUtil.renderModel(SpecialModels.STI2011_BULLET1.getModel(), stack, matrices, renderBuffer, light, overlay);
+        }
+        matrices.pop();
+
+        if(controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_EMPTY).equals(controller.getPreviousAnimation()) ) {
+            matrices.push();
+            {
+                controller.applySpecialModelTransform(SpecialModels.STI2011_BODY.getModel(), STI2011AnimationController.INDEX_BULLET2, transformType, matrices);
+                RenderUtil.renderModel(SpecialModels.STI2011_BULLET2.getModel(), stack, matrices, renderBuffer, light, overlay);
+            }
+            matrices.pop();
+        }
+
         PlayerHandAnimation.render(controller,transformType,matrices,renderBuffer,light);
     }
 }

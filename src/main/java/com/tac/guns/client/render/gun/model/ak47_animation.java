@@ -35,11 +35,11 @@ public class ak47_animation implements IOverrideModel {
     @Override
     public void render(float v, ItemCameraTransforms.TransformType transformType, ItemStack stack, ItemStack parent, LivingEntity entity, MatrixStack matrices, IRenderTypeBuffer renderBuffer, int light, int overlay)
     {
-        
+
         Ak47AnimationController controller = Ak47AnimationController.getInstance();
         Gun gun = ((GunItem) stack.getItem()).getGun();
         float cooldownOg = ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1 : ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
-        
+
         matrices.push();
         {
             controller.applySpecialModelTransform(SpecialModels.AK47.getModel(),Ak47AnimationController.INDEX_BODY,transformType,matrices);
@@ -132,7 +132,7 @@ public class ak47_animation implements IOverrideModel {
         PlayerHandAnimation.render(controller,transformType,matrices,renderBuffer,light);
     }
 
-     
+
 
     //TODO comments
 }

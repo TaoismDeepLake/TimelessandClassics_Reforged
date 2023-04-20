@@ -29,10 +29,7 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.DyeColor;
-import net.minecraft.item.DyeItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.item.*;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
@@ -66,6 +63,8 @@ public class WorkbenchScreen extends ContainerScreen<WorkbenchContainer>
     private Button btnCraft;
     private CheckBox checkBoxMaterials;
     private ItemStack displayStack;
+
+    float posDelta = 0.1f;//works for gun models, + means higher
 
     public WorkbenchScreen(WorkbenchContainer container, PlayerInventory playerInventory, ITextComponent title)
     {
@@ -291,9 +290,7 @@ public class WorkbenchScreen extends ContainerScreen<WorkbenchContainer>
         {
             for(Pair<Ingredient, Integer> material : materials)
             {
-                ItemStack stack = material.getFirst().getMatchingStacks()[0];
-                stack.setCount(material.getSecond());
-                MaterialItem item = new MaterialItem(stack);
+                MaterialItem item = new MaterialItem(material.getFirst(), material.getSecond());
                 item.update();
                 this.materials.add(item);
             }
@@ -437,9 +434,9 @@ public class WorkbenchScreen extends ContainerScreen<WorkbenchContainer>
                 GunRenderingHandler.get().renderScope(this.minecraft.player, currentItem, ItemCameraTransforms.TransformType.HEAD, matrixStack, buffer, 15728880, 0F); // GROUND, matrixStack, buffer, 15728880, 0F);
                 matrixStack.scale(0.5f,0.5f,0.5f);
             }else if(currentItem.getItem() instanceof GunItem){
-                matrixStack.scale(2,2,2);
-                GunRenderingHandler.get().renderWeapon(this.minecraft.player, currentItem, ItemCameraTransforms.TransformType.GROUND, matrixStack, buffer, 15728880, 0F);
-                matrixStack.scale(0.5f,0.5f,0.5f);
+                matrixStack.translate(0,posDelta,0);
+                GunRenderingHandler.get().renderWeapon(this.minecraft.player, currentItem, ItemCameraTransforms.TransformType.FIXED, matrixStack, buffer, 15728880, 0F);
+                //TransformType.GROUND with 2x size will block out the text above it.
             }else Minecraft.getInstance().getItemRenderer().renderItem(currentItem, ItemCameraTransforms.TransformType.FIXED, false, matrixStack, buffer, 15728880, OverlayTexture.NO_OVERLAY, RenderUtil.getModel(currentItem));
 
             buffer.finish();
@@ -497,7 +494,7 @@ public class WorkbenchScreen extends ContainerScreen<WorkbenchContainer>
 
     private List<MaterialItem> getMaterials()
     {
-        List<MaterialItem> materials = NonNullList.withSize(6, new MaterialItem(ItemStack.EMPTY));
+        List<MaterialItem> materials = NonNullList.withSize(6, new MaterialItem());
         List<MaterialItem> filteredMaterials = this.materials.stream().filter(materialItem -> this.checkBoxMaterials.isToggled() ? !materialItem.isEnabled() : !materialItem.stack.isEmpty()).collect(Collectors.toList());
         for(int i = 0; i < filteredMaterials.size() && i < materials.size(); i++)
         {
@@ -516,13 +513,27 @@ public class WorkbenchScreen extends ContainerScreen<WorkbenchContainer>
         public static final MaterialItem EMPTY = new MaterialItem();
 
         private boolean enabled = false;
-        private ItemStack stack = ItemStack.EMPTY;
+        private final int count;
+        private int tickcount;
+        private int index;
+        private ItemStack stack;
+        private final Ingredient ingredient;
+        private final ItemStack[] matchingstacks;
 
-        private MaterialItem() {}
-
-        private MaterialItem(ItemStack stack)
+        private MaterialItem()
         {
-            this.stack = stack;
+            this.ingredient = null;
+            this.matchingstacks = new ItemStack[]{ItemStack.EMPTY};
+            this.stack = ItemStack.EMPTY;
+            this.count =0;
+        }
+
+        private MaterialItem(Ingredient ingredient, int count)
+        {
+            this.ingredient = ingredient;
+            this.matchingstacks = ingredient.getMatchingStacks();
+            this.stack = this.matchingstacks[0];
+            this.count = count;
         }
 
         public ItemStack getStack()
@@ -532,9 +543,18 @@ public class WorkbenchScreen extends ContainerScreen<WorkbenchContainer>
 
         public void update()
         {
-            if(!this.stack.isEmpty())
+            if(++this.tickcount%20==0){
+                this.tickcount=0;
+                this.index+=1;
+                if(this.index==this.matchingstacks.length){
+                    this.index=0;
+                }
+                this.stack = this.matchingstacks[this.index];
+            }
+            if(this.ingredient!=null)
             {
-                this.enabled = InventoryUtil.hasItemStack(Minecraft.getInstance().player, this.stack);
+                this.stack.setCount(this.count);
+                this.enabled = InventoryUtil.hasIngredient(Minecraft.getInstance().player, new Pair<>(this.ingredient, this.count));
             }
         }
 

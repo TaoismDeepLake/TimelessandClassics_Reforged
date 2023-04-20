@@ -7,6 +7,7 @@ import com.mrcrayfish.obfuscate.client.event.PlayerModelEvent;
 import com.mrcrayfish.obfuscate.client.event.RenderItemEvent;
 import com.mrcrayfish.obfuscate.common.data.SyncedPlayerData;
 import com.tac.guns.Config;
+import com.tac.guns.GunMod;
 import com.tac.guns.Reference;
 import com.tac.guns.client.GunRenderType;
 import com.tac.guns.client.handler.command.GunEditor;
@@ -32,6 +33,7 @@ import com.tac.guns.item.attachment.impl.Scope;
 import com.tac.guns.network.PacketHandler;
 import com.tac.guns.network.message.MessagePlayerShake;
 import com.tac.guns.util.GunModifierHelper;
+import com.tac.guns.util.IDLNBTUtil;
 import com.tac.guns.util.OptifineHelper;
 import com.tac.guns.util.math.OneDimensionalPerlinNoise;
 import com.tac.guns.util.math.SecondOrderDynamics;
@@ -182,7 +184,7 @@ public class GunRenderingHandler {
             return;
         if(!(mc.player.getHeldItemMainhand().getItem() instanceof GunItem) || mc.player.getHeldItemMainhand().getTag() == null)
             return;
-        if((Config.COMMON.gameplay.forceCameraShakeOnFire.get() || Config.CLIENT.display.cameraShakeOnFire.get()) && Minecraft.getInstance().player.getHeldItemMainhand().getTag().getInt("CurrentFireMode") != 0){
+        if((Config.COMMON.gameplay.forceCameraShakeOnFire.get() || Config.CLIENT.display.cameraShakeOnFire.get()) && IDLNBTUtil.getInt(mc.player.getHeldItemMainhand(), "CurrentFireMode") != 0){
             float cameraShakeDuration = 0.06f; //TODO: Force to be adjusted per shot later in 0.3.4-0.3.5, customizable per gun
             long alphaTime = System.currentTimeMillis() - fireTime;
             float progress = (alphaTime < cameraShakeDuration * 1000 ? 1 - alphaTime / (cameraShakeDuration * 1000f) : 0);
@@ -379,6 +381,11 @@ public class GunRenderingHandler {
             }
         }
         Minecraft mc = Minecraft.getInstance();
+        if (mc.player == null)
+        {
+            return;
+        }
+
         GunItem gunItem = (GunItem) heldItem.getItem();
         if (mc.gameSettings.viewBobbing && mc.getRenderViewEntity() instanceof PlayerEntity)
         {
@@ -390,7 +397,7 @@ public class GunRenderingHandler {
             /* Reverses the original bobbing rotations and translations so it can be controlled */
             matrixStack.rotate(Vector3f.XP.rotationDegrees(-(Math.abs(MathHelper.cos(distanceWalked * (float) Math.PI - 0.2F) * cameraYaw) * 5.0F)));
             matrixStack.rotate(Vector3f.ZP.rotationDegrees(-(MathHelper.sin(distanceWalked * (float) Math.PI) * cameraYaw * 3.0F)));
-            matrixStack.translate((double) -(MathHelper.sin(distanceWalked * (float) Math.PI) * cameraYaw * 0.5F), (double) -(-Math.abs(MathHelper.cos(distanceWalked * (float) Math.PI) * cameraYaw)), 0.0D);
+            matrixStack.translate(-(MathHelper.sin(distanceWalked * (float) Math.PI) * cameraYaw * 0.5F), -(-Math.abs(MathHelper.cos(distanceWalked * (float) Math.PI) * cameraYaw)), 0.0D);
 
             // Walking bobbing
             boolean aimed = false;
@@ -463,7 +470,7 @@ public class GunRenderingHandler {
             matrixStack.translate(0, -2 * AimingHandler.get().getNormalisedAdsProgress(), 0);
         }
 
-        ClientPlayerEntity entity = Minecraft.getInstance().player;
+        ClientPlayerEntity entity = mc.player;
         IBakedModel model = Minecraft.getInstance().getItemRenderer().getItemModelWithOverrides(overrideModel.isEmpty() ? heldItem : overrideModel, entity.world, entity);
         float scaleX = model.getItemCameraTransforms().firstperson_right.scale.getX();
         float scaleY = model.getItemCameraTransforms().firstperson_right.scale.getY();
@@ -474,7 +481,6 @@ public class GunRenderingHandler {
 
         matrixStack.push();
         Gun modifiedGun = gunItem.getModifiedGun(heldItem);
-
 
         if (modifiedGun.canAimDownSight())
         {
@@ -488,16 +494,20 @@ public class GunRenderingHandler {
                 /* Creates the required offsets to position the scope into the middle of the screen. */
                 if (modifiedGun.canAttachType(IAttachment.Type.SCOPE) && scope != null) {
                     double viewFinderOffset = isScopeOffsetType || OptifineHelper.isShadersEnabled() ? scope.getViewFinderOffsetSpecial() : scope.getViewFinderOffset();
-                    if(scope.getAdditionalZoom().getFovZoom() > 0)
+                    if (scope.getAdditionalZoom().getFovZoom() > 0)
                         viewFinderOffset = isScopeRenderType ? (isScopeOffsetType || OptifineHelper.isShadersEnabled() ? scope.getViewFinderOffsetSpecial() : scope.getViewFinderOffset()) : (isScopeOffsetType || OptifineHelper.isShadersEnabled() ? scope.getViewFinderOffsetSpecialDR() : scope.getViewFinderOffsetDR()); // switches between either, but either must be populated
 
                     //if (OptifineHelper.isShadersEnabled()) viewFinderOffset *= 0.735;
                     //if (isScopeRenderType) viewFinderOffset *= 0.735;
-                    Gun.ScaledPositioned scaledPos = modifiedGun.getModules().getAttachments().getScope();
-                    xOffset = -translateX +  (modifiedGun.getModules().getZoom().getXOffset() * 0.0625) + -scaledPos.getXOffset() * 0.0625 * scaleX;
-                    yOffset = -translateY + (8 - scaledPos.getYOffset()) * 0.0625 * scaleY - scope.getCenterOffset() * scaleY * 0.0625 * scaledPos.getScale();
-                    zOffset = Config.CLIENT.display.sight1xRealisticPosition.get() && scope.getAdditionalZoom().getFovZoom() == 0 ? -translateZ + modifiedGun.getModules().getZoom().getZOffset() * 0.0625 * scaleZ :
-                            -translateZ - scaledPos.getZOffset() * 0.0625 * scaleZ + 0.72 - viewFinderOffset * scaleZ * scaledPos.getScale();
+                    try {
+                        Gun.ScaledPositioned scaledPos = modifiedGun.getModules().getAttachments().getScope();
+                        xOffset = -translateX + (modifiedGun.getModules().getZoom().getXOffset() * 0.0625) + -scaledPos.getXOffset() * 0.0625 * scaleX;
+                        yOffset = -translateY + (8 - scaledPos.getYOffset()) * 0.0625 * scaleY - scope.getCenterOffset() * scaleY * 0.0625 * scaledPos.getScale();
+                        zOffset = Config.CLIENT.display.sight1xRealisticPosition.get() && scope.getAdditionalZoom().getFovZoom() == 0 ? -translateZ + modifiedGun.getModules().getZoom().getZOffset() * 0.0625 * scaleZ :
+                                -translateZ - scaledPos.getZOffset() * 0.0625 * scaleZ + 0.72 - viewFinderOffset * scaleZ * scaledPos.getScale();
+                    } catch (NullPointerException e) {
+                        GunMod.LOGGER.info("GunRenderingHandler NPE @509");
+                    }
                 }
                 else if (modifiedGun.canAttachType(IAttachment.Type.OLD_SCOPE) && scope != null) {
                     double viewFinderOffset = isScopeOffsetType || isScopeRenderType ? scope.getViewFinderOffsetSpecial() : scope.getViewFinderOffset(); // switches between either, but either must be populated
@@ -565,6 +575,12 @@ public class GunRenderingHandler {
             }
         }
 
+        //Set Delayed Sway config options
+
+        this.maxRotationDegree = Config.CLIENT.display.weaponDelayedSwayMaximum.get().floatValue(); // 3.95f or 4.5f
+        this.delayedSwayMultiplier = Config.CLIENT.display.weaponDelayedSwayMultiplier.get().floatValue(); // Lower = a more delayed sway
+        this.YDIR = Config.CLIENT.display.weaponDelayedSwayDirection.get() ? Vector3f.YN : Vector3f.YP;
+
         applyDelayedSwayTransforms(matrixStack, entity, event.getPartialTicks());
         float equipProgress = this.getEquipProgress(event.getPartialTicks());
         matrixStack.rotate(Vector3f.XP.rotationDegrees(equipProgress * -50F));
@@ -603,99 +619,56 @@ public class GunRenderingHandler {
         this.renderWeapon(Minecraft.getInstance().player, heldItem, transformType, event.getMatrixStack(), event.getBuffers(), packedLight, event.getPartialTicks());
         matrixStack.pop();
     }
-    private final float maxRotationDegree = 4.5f;
+    private static float maxRotationDegree; // 3.95f or 4.5f
+    private static float delayedSwayMultiplier; // Lower = a more delayed sway
+    private static Vector3f YDIR;
     private void applyDelayedSwayTransforms(MatrixStack stack, ClientPlayerEntity player, float partialTicks)
     {
-        if(player != null)
-        {
-            float f4 = MathHelper.lerp(partialTicks, player.prevRenderArmYaw, player.renderArmYaw);
-            float degree = delaySwayDynamics.update(0, (player.getYaw(partialTicks) - f4) * -0.1F);
-            if(Math.abs(degree) > maxRotationDegree) degree = degree / Math.abs(degree) * maxRotationDegree;
+        if(Config.CLIENT.display.weaponDelayedSway.get())
+            if(player != null)
+            {
+                float f4 = MathHelper.lerp(partialTicks, player.prevRenderArmYaw, player.renderArmYaw);
+                float degree = delaySwayDynamics.update(0, (player.getYaw(partialTicks) - f4) * delayedSwayMultiplier);
+                if(Math.abs(degree) > maxRotationDegree) degree = degree / Math.abs(degree) * maxRotationDegree;
 
-            stack.translate(-this.translateX, -this.translateY, -this.translateZ);
-            stack.rotate(Vector3f.YP.rotationDegrees(degree));
-            stack.rotate(Vector3f.ZP.rotationDegrees(degree*1.5f * (float) (1f - AimingHandler.get().getNormalisedAdsProgress())));
-            stack.translate(this.translateX, this.translateY, this.translateZ);
-        }
+                if((Config.CLIENT.display.weaponDelayedSwayYNOptical.get() && Gun.getScope(player.getHeldItemMainhand()) != null) || YDIR.equals(Vector3f.YN)) {
+                    stack.translate(this.translateX, this.translateY, this.translateZ);
+                    stack.rotate(YDIR.rotationDegrees(degree));
+                    stack.rotate(Vector3f.ZP.rotationDegrees(degree * 1.5f * (float) (1f - AimingHandler.get().getNormalisedAdsProgress())));
+                    stack.translate(-this.translateX, -this.translateY, -this.translateZ);
+                }
+                else{
+                    stack.translate(-this.translateX, -this.translateY, -this.translateZ);
+                    stack.rotate(YDIR.rotationDegrees(degree));
+                    stack.rotate(Vector3f.ZP.rotationDegrees(degree * 1.5f * (float) (1f - AimingHandler.get().getNormalisedAdsProgress())));
+                    stack.translate(this.translateX, this.translateY, this.translateZ);
+                }
+            }
     }
 
     public void applyDelayedSwayTransforms(MatrixStack stack, ClientPlayerEntity player, float partialTicks, float percentage)
     {
-        if(player != null)
-        {
-            float f4 = MathHelper.lerp(partialTicks, player.prevRenderArmYaw, player.renderArmYaw);
-            float degree = delaySwayDynamics.update(0, (player.getYaw(partialTicks) - f4) * -0.1F);
-            if(Math.abs(degree) > maxRotationDegree)
-                degree = degree / Math.abs(degree) * maxRotationDegree;
-
-            degree *= percentage;
-
-            stack.translate(-this.translateX, -this.translateY, -this.translateZ);
-            stack.rotate(Vector3f.YP.rotationDegrees(degree));
-            stack.rotate(Vector3f.ZP.rotationDegrees(degree*1.5f * (float) (1f - AimingHandler.get().getNormalisedAdsProgress())));
-            stack.translate(this.translateX, this.translateY, this.translateZ);
-        }
+        if(Config.CLIENT.display.weaponDelayedSway.get())
+            if(player != null)
+            {
+                float f4 = MathHelper.lerp(partialTicks, player.prevRenderArmYaw, player.renderArmYaw);
+                float degree = delaySwayDynamics.update(0, (player.getYaw(partialTicks) - f4) * delayedSwayMultiplier);
+                if(Math.abs(degree) > maxRotationDegree) degree = degree / Math.abs(degree) * maxRotationDegree;
+                degree *= percentage;
+                if((Config.CLIENT.display.weaponDelayedSwayYNOptical.get() && Gun.getScope(player.getHeldItemMainhand()) != null) || YDIR.equals(Vector3f.YN)) {
+                    stack.translate(this.translateX, this.translateY, this.translateZ);
+                    stack.rotate(YDIR.rotationDegrees(degree));
+                    stack.rotate(Vector3f.ZP.rotationDegrees(degree * 1.5f * (float) (1f - AimingHandler.get().getNormalisedAdsProgress())));
+                    stack.translate(-this.translateX, -this.translateY, -this.translateZ);
+                }
+                else{
+                    stack.translate(-this.translateX, -this.translateY, -this.translateZ);
+                    stack.rotate(YDIR.rotationDegrees(degree));
+                    stack.rotate(Vector3f.ZP.rotationDegrees(degree * 1.5f * (float) (1f - AimingHandler.get().getNormalisedAdsProgress())));
+                    stack.translate(this.translateX, this.translateY, this.translateZ);
+                }
+            }
     }
-
-    private void applyDelayedSwayScopeReversal(MatrixStack poseStack, ClientPlayerEntity player, float partialTicks)
-    {
-        poseStack.push();
-        if(player != null)
-        {
-            Matrix4f matrix = poseStack.getLast().getMatrix();
-
-            poseStack.translate(this.translateX, this.translateY, this.translateZ);
-            /*
-            PlayerEntity playerentity = (PlayerEntity) mc.getRenderViewEntity();
-            float deltaDistanceWalked = playerentity.distanceWalkedModified - playerentity.prevDistanceWalkedModified;
-            float distanceWalked = -(playerentity.distanceWalkedModified + deltaDistanceWalked * event.getPartialTicks());
-            float cameraYaw = MathHelper.lerp(event.getPartialTicks(), playerentity.prevCameraYaw, playerentity.cameraYaw);
-
-            *//* Reverses the original bobbing rotations and translations so it can be controlled *//*
-            matrixStack.rotate(Vector3f.XP.rotationDegrees(-(Math.abs(MathHelper.cos(distanceWalked * (float) Math.PI - 0.2F) * cameraYaw) * 5.0F)));
-            matrixStack.rotate(Vector3f.ZP.rotationDegrees(-(MathHelper.sin(distanceWalked * (float) Math.PI) * cameraYaw * 3.0F)));
-            matrixStack.translate((double) -(MathHelper.sin(distanceWalked * (float) Math.PI) * cameraYaw * 0.5F), (double) -(-Math.abs(MathHelper.cos(distanceWalked * (float) Math.PI) * cameraYaw)), 0.0D);
-*/
-            float headPitch = MathHelper.rotLerp(partialTicks, player.prevCameraYaw, player.cameraYaw);
-            float swayPitch = headPitch;
-            swayPitch *= 1.0 - 0.25 * AimingHandler.get().getNormalisedAdsProgress();
-            matrix.mul(SwayType.DRAG.pitchRotation.rotationDegrees(swayPitch * 0.3f));
-
-            float headYaw = MathHelper.rotLerp(partialTicks, player.prevRotationYawHead, player.getRotationYawHead());
-            float swayYaw = headYaw;
-            swayYaw *= 1.0 - 0.25 * AimingHandler.get().getNormalisedAdsProgress();
-            matrix.mul(SwayType.DRAG.yawRotation.rotationDegrees(swayYaw * 0.3f));
-
-            poseStack.translate(-this.translateX, -this.translateY, -this.translateZ);
-        }
-        poseStack.pop();
-    }
-
-    public enum SwayType
-    {
-        DIRECTIONAL(Vector3f.XN, Vector3f.YN),
-        DRAG(Vector3f.XP, Vector3f.YP);
-
-        Vector3f pitchRotation;
-        Vector3f yawRotation;
-
-        SwayType(Vector3f pitchRotation, Vector3f yawRotation)
-        {
-            this.pitchRotation = pitchRotation;
-            this.yawRotation = yawRotation;
-        }
-
-        public Vector3f getPitchRotation()
-        {
-            return this.pitchRotation;
-        }
-
-        public Vector3f getYawRotation()
-        {
-            return this.yawRotation;
-        }
-    }
-
     // Sprinting Offset Transition, the same transition aggregate used for all running anims,
     // made public for adjusting hands within animator instances
     public float sOT = 0.0f;
@@ -783,11 +756,11 @@ public class GunRenderingHandler {
         this.newSwayYawPitch = ((float) ((RecoilHandler.get().lastRandPitch * this.newSwayYawAmount - this.newSwayYawAmount / 2F) * recoilNormal)) / 2;
         this.newSwayYawYaw = ((float) ((RecoilHandler.get().lastRandYaw * this.newSwayYawAmount - this.newSwayYawAmount / 2F) * recoilNormal)) / 2;
         float kickTiming = 0.11f;
-        if (item.getTag().getInt("CurrentFireMode") == 1) {
+        if (IDLNBTUtil.getInt(item, "CurrentFireMode") == 1) {
             this.newSwayYawAmount *= 0.5;
             kickTiming += 0.06f; // Soften the kick a little, helps with tracking and feel
         }
-        if (mc.player.isCrouching()) {
+        if (mc.player != null && mc.player.isCrouching()) {
             this.recoilLift *= 0.875;
         }
         this.weaponsHorizontalAngle = ((float) (RecoilHandler.get().getGunHorizontalRecoilAngle() * recoilNormal) * (float) RecoilHandler.get().getAdsRecoilReduction(gun));
@@ -919,12 +892,12 @@ public class GunRenderingHandler {
         //matrixStack.translate(noiseX.getValue()* (1 - AimingHandler.get().getNormalisedRepairProgress()), (noiseY.getValue() + additionNoiseY.getValue()) * (1 - AimingHandler.get().getNormalisedRepairProgress()), 0);
         if(AimingHandler.get().getNormalisedAdsProgress() == 1) {
             matrixStack.translate(aimed_noiseX.getValue(), aimed_noiseY.getValue() + additionNoiseY.getValue(), 0);
-            matrixStack.rotate(Vector3f.YP.rotationDegrees((float) (aimed_noiseRotationY.getValue())));
+            matrixStack.rotate(Vector3f.YP.rotationDegrees(aimed_noiseRotationY.getValue()));
             matrixStack.rotate(Vector3f.ZP.rotationDegrees((float) (aimed_noiseRotationY.getValue()*0.85)));
         }
         else {
             matrixStack.translate(noiseX.getValue(), noiseY.getValue() + additionNoiseY.getValue(), 0);
-            matrixStack.rotate(Vector3f.YP.rotationDegrees((float) (noiseRotationY.getValue())));
+            matrixStack.rotate(Vector3f.YP.rotationDegrees(noiseRotationY.getValue()));
         }
 
     }
@@ -933,12 +906,12 @@ public class GunRenderingHandler {
         //matrixStack.translate(noiseX.getValue()* (1 - AimingHandler.get().getNormalisedRepairProgress()), (noiseY.getValue() + additionNoiseY.getValue()) * (1 - AimingHandler.get().getNormalisedRepairProgress()), 0);
         if(AimingHandler.get().getNormalisedAdsProgress() == 1) {
             matrixStack.translate(aimed_noiseX.getValue() * (reverser*2), (aimed_noiseY.getValue() + additionNoiseY.getValue()) * reverser, 0);
-            matrixStack.rotate(Vector3f.YP.rotationDegrees((float) (aimed_noiseRotationY.getValue()*reverser)));
-            matrixStack.rotate(Vector3f.ZP.rotationDegrees((float) (aimed_noiseRotationY.getValue()*0.85*reverser)));
+            matrixStack.rotate(Vector3f.YP.rotationDegrees(aimed_noiseRotationY.getValue() * reverser));
+            matrixStack.rotate(Vector3f.ZP.rotationDegrees((float) (aimed_noiseRotationY.getValue() * 0.85 * reverser)));
         }
         else {
             matrixStack.translate(noiseX.getValue() * (reverser*2), (noiseY.getValue() + additionNoiseY.getValue()) * reverser, 0);
-            matrixStack.rotate(Vector3f.YP.rotationDegrees((float) (noiseRotationY.getValue() * reverser)));
+            matrixStack.rotate(Vector3f.YP.rotationDegrees(noiseRotationY.getValue() * reverser));
         }
 
     }
@@ -1289,7 +1262,9 @@ public class GunRenderingHandler {
                             GunAnimationController controller = GunAnimationController.fromItem(stack.getItem());
                             if (controller != null) {
                                 if (type != null) {
-                                    if (controller instanceof PistalAnimationController && gun.getModules().getAttachments().getPistolScope().getDoOnSlideMovement()) {
+                                    if (controller instanceof PistalAnimationController
+                                            && gun.getModules().getAttachments().getPistolScope() != null
+                                            && gun.getModules().getAttachments().getPistolScope().getDoOnSlideMovement()) {
                                         //Minecraft.getInstance().player.sendChatMessage("test");
                                         PistalAnimationController pcontroller = (PistalAnimationController) controller;
                                         controller.applyTransform(stack, pcontroller.getSlideNodeIndex(), transformType, entity, matrixStack);

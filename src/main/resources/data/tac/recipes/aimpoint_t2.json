@@ -5,11 +5,11 @@
       "item": {
         "tag": "forge:ingots/iron"
       },
-      "count": 18
+      "count": 12
     },
     {
       "item": {
-        "tag": "forge:glass_panes"
+        "tag": "forge:glass_panes/colorless"
       },
       "count": 4
     },

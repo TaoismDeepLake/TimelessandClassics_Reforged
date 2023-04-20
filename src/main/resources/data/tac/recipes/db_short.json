@@ -1,0 +1,20 @@
+{
+  "type": "tac:workbench",
+  "materials": [
+    {
+      "item": {
+        "tag": "forge:ingots/iron"
+      },
+      "count": 12
+    },
+    {
+      "item": {
+        "tag": "forge:leather"
+      },
+      "count": 4
+    }
+  ],
+  "result": {
+    "item": "tac:db_short"
+  }
+}

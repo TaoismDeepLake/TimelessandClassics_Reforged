@@ -3,6 +3,7 @@ package com.tac.guns.extra_events;
 import java.util.Locale;
 
 import com.mrcrayfish.obfuscate.common.data.SyncedPlayerData;
+import com.tac.guns.GunMod;
 import com.tac.guns.entity.DamageSourceProjectile;
 import com.tac.guns.entity.ProjectileEntity;
 import com.tac.guns.event.LevelUpEvent;
@@ -14,12 +15,17 @@ import com.tac.guns.item.TransitionalTypes.TimelessGunItem;
 import com.tac.guns.tileentity.UpgradeBenchTileEntity;
 import com.tac.guns.util.WearableHelper;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.SoundCategory;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.VersionChecker;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -43,6 +49,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.apache.logging.log4j.Level;
 
 import static com.tac.guns.inventory.gear.InventoryListener.ITEM_HANDLER_CAPABILITY;
 
@@ -62,6 +69,37 @@ public class TacEventListeners {
         (In short this serves as a temporary test bed to keep development on new functions on course)
     */
 
+    private static boolean checked = true;
+    private static boolean confirmed = false;
+    private static VersionChecker.CheckResult status;
+    @SubscribeEvent
+    public static void InformPlayerOfUpdate(EntityJoinWorldEvent e)
+    {
+        try {
+            if(!(e.getEntity() instanceof PlayerEntity))
+                return;
+
+            if (checked) {
+                if (GunMod.modInfo != null) {
+                    status = VersionChecker.getResult(GunMod.modInfo);
+                    checked = false;
+                }
+            }
+            if (!confirmed) {
+                if (status.status == VersionChecker.Status.OUTDATED || status.status == VersionChecker.Status.BETA_OUTDATED) {
+                    ((PlayerEntity) e.getEntity()).sendStatusMessage(new TranslationTextComponent("updateCheck.tac", status.target, status.url), false);
+                    confirmed = true;
+                }
+            }
+        }
+        catch(Exception ev)
+        {
+            GunMod.LOGGER.log(Level.ERROR, ev.getMessage());
+            return;
+        }
+        GunMod.LOGGER.log(Level.INFO, status.status);
+    }
+
     @SubscribeEvent
     public void onPartialLevel(LevelUpEvent.Post event)
     {
@@ -69,6 +107,7 @@ public class TacEventListeners {
         event.getPlayer().getEntityWorld().playSound(player, player.getPosition(), ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.experience_orb.pickup")), SoundCategory.PLAYERS,4.0F, 1.0F);
     }
 
+    // TODO: remaster method to play empty fire sound on most-all guns
     /* BTW this was by bomb787 as a Timeless Contributor */
     @SubscribeEvent
     public static void postShoot(GunFireEvent.Post event) {

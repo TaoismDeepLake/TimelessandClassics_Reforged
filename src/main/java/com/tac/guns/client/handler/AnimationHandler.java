@@ -72,13 +72,14 @@ public enum AnimationHandler {
         SPR15AnimationController.getInstance();
         Deagle50AnimationController.getInstance();
         Type95LAnimationController.getInstance();
+        Type191AnimationController.getInstance();
         MAC10AnimationController.getInstance();
         Vector45AnimationController.getInstance();
         SKSTacticalAnimationController.getInstance();
         M24AnimationController.getInstance();
+        M82A2AnimationController.getInstance();
         //TODO: RPK redo due to static animation issue
         RPKAnimationController.getInstance();
-        M249AnimationController.getInstance();
     }
 
     public void onGunReload(boolean reloading, ItemStack itemStack) {
@@ -121,7 +122,7 @@ public enum AnimationHandler {
         if (controller.isAnimationRunning()) {
             AnimationMeta meta = controller.getPreviousAnimation();
             if(meta == null) return;
-            if (meta.equals(controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.INSPECT)))
+            if (meta.equals(controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.INSPECT)) || meta.equals(controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.INSPECT_EMPTY)))
                 controller.stopAnimation();
             else {
                 AnimationRunner runner = Animations.getAnimationRunner(meta.getResourceLocation());
@@ -168,7 +169,11 @@ public enum AnimationHandler {
     		if( controller != null && !controller.isAnimationRunning() )
     		{
     			controller.stopAnimation();
-    			controller.runAnimation( GunAnimationController.AnimationLabel.INSPECT );
+                if (Gun.hasAmmo(stack)) {
+                    controller.runAnimation(GunAnimationController.AnimationLabel.INSPECT);
+                } else {
+                    controller.runAnimation(GunAnimationController.AnimationLabel.INSPECT_EMPTY);
+                }
     		}
     	};
     	InputHandler.INSPECT.addPressCallback( callback );

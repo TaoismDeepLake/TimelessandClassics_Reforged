@@ -44,18 +44,18 @@ import com.tac.guns.client.screen.TaCSettingsScreen;
 import com.tac.guns.client.screen.UpgradeBenchScreen;
 import com.tac.guns.client.screen.WorkbenchScreen;
 import com.tac.guns.client.settings.GunOptions;
-import com.tac.guns.init.ModBlocks;
-import com.tac.guns.init.ModContainers;
-import com.tac.guns.init.ModEntities;
-import com.tac.guns.init.ModItems;
+import com.tac.guns.client.util.UpgradeBenchRenderUtil;
+import com.tac.guns.init.*;
 import com.tac.guns.item.IColored;
 import com.tac.guns.network.PacketHandler;
 import com.tac.guns.network.message.MessageAttachments;
 import com.tac.guns.network.message.MessageInspection;
+import com.tac.guns.util.IDLNBTUtil;
 import com.tac.guns.util.math.SecondOrderDynamics;
 
 import de.javagl.jgltf.model.animation.AnimationRunner;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.gui.screen.ControlsScreen;
 import net.minecraft.client.gui.screen.MouseSettingsScreen;
@@ -69,11 +69,19 @@ import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.entity.PlayerRenderer;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.event.entity.EntityEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.VersionChecker;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
@@ -116,7 +124,7 @@ public class ClientHandler
             MinecraftForge.EVENT_BUS.register(ObjectRenderEditor.get());
         }
 
-        //ClientRegistry.bindTileEntityRenderer(ModTileEntities.UPGRADE_BENCH.get(), UpgradeBenchRenderUtil::new);
+        ClientRegistry.bindTileEntityRenderer(ModTileEntities.UPGRADE_BENCH.get(), UpgradeBenchRenderUtil::new);
 
         // Load key binds
         InputHandler.initKeys();
@@ -151,7 +159,7 @@ public class ClientHandler
 
     private static void setupRenderLayers()
     {
-        //RenderTypeLookup.setRenderLayer(ModBlocks.UPGRADE_BENCH.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.UPGRADE_BENCH.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(ModBlocks.WORKBENCH.get(), RenderType.getCutout());
     }
 
@@ -160,7 +168,7 @@ public class ClientHandler
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.PROJECTILE.get(), ProjectileRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.GRENADE.get(), GrenadeRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.THROWABLE_GRENADE.get(), ThrowableGrenadeRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.THROWABLE_STUN_GRENADE.get(), ThrowableGrenadeRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.THROWABLE_STUN_GRENADE.get(), ThrowableGrenadeRenderer::new); // TODO: Bring back flashes
         //RenderingRegistry.registerEntityRenderingHandler(ModEntities.MISSILE.get(), MissileRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.RPG7_MISSILE.get(), MissileRenderer::new);
     }
@@ -172,9 +180,9 @@ public class ClientHandler
             {
                 return -1;
             }
-            if(index == 0 && stack.hasTag() && stack.getTag().contains("Color", Constants.NBT.TAG_INT))
+            if(index == 0)
             {
-                return stack.getTag().getInt("Color");
+                return IDLNBTUtil.getInt(stack,"Color",-1);
             }
             return -1;
         };
@@ -321,7 +329,7 @@ public class ClientHandler
                 WorldRenderer.drawBoundingBox(event.getMatrixStack(), event.getBuffers().getBuffer(RenderType.getLines()), box, 1.0F, 1.0F, 0.0F, 1.0F);
 
                 AxisAlignedBB boundingBox = entity.getBoundingBox().offset(entity.getPositionVec().inverse());
-                boundingBox = boundingBox.grow(Config.COMMON.gameplay.growBoundingBoxAmount.get(), 0, Config.COMMON.gameplay.growBoundingBoxAmount.get());
+                boundingBox = boundingBox.grow(Config.COMMON.gameplay.growBoundingBoxAmountV2.get(), 0, Config.COMMON.gameplay.growBoundingBoxAmountV2.get());
                 WorldRenderer.drawBoundingBox(event.getMatrixStack(), event.getBuffers().getBuffer(RenderType.getLines()), boundingBox, 0.0F, 1.0F, 1.0F, 1.0F);
             }
         }

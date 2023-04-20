@@ -69,7 +69,7 @@ public class ModItems
     public static final RegistryObject<Item> TYPE81_X = REGISTER.register("type81_x", () -> new TimelessGunItem(properties -> properties.group(GunMod.RIFLE), GunModifiers.TYPE81x_MOD));
     //public static final RegistryObject<Item> PKP_PENCHENBERG = REGISTER.register("pkp_penchenberg", () -> new TimelessGunItem(properties -> properties.group(GunMod.HEAVY_MATERIAL)));
     public static final RegistryObject<Item> MP7 = REGISTER.register("mp7", () -> new TimelessGunItem(properties -> properties.group(GunMod.SMG), GunModifiers.MP7_MOD));
-    //public static final RegistryObject<Item> M82A2 = REGISTER.register("m82a2", () -> new TimelessGunItem(properties -> properties.group(GunMod.SNIPER)));
+    public static final RegistryObject<Item> M82A2 = REGISTER.register("m82a2", () -> new TimelessGunItem(properties -> properties.group(GunMod.SNIPER), GunModifiers.M82A2_MOD));
     public static final RegistryObject<Item> AI_AWP = REGISTER.register("ai_awp", () -> new TimelessGunItem(properties -> properties.group(GunMod.SNIPER), GunModifiers.AIAWP_MOD));
     //public static final RegistryObject<GunItem> RPG7 = REGISTER.register("rpg7", () -> new TimelessGunItem(properties -> properties.group(GunMod.EXPLOSIVES)));
     //public static final RegistryObject<Item> TEC_9 = REGISTER.register("tec_9", () -> new TimelessPistolGunItem(properties -> properties.group(GunMod.PISTOL)));
@@ -87,7 +87,7 @@ public class ModItems
     //public static final RegistryObject<GunItem> M79 = REGISTER.register("m79", () -> new TimelessGunItem(properties -> properties.group(GunMod.EXPLOSIVES)));
     //public static final RegistryObject<GunItem> MGL_40MM = REGISTER.register("mgl_40mm", () -> new TimelessGunItem(properties -> properties.group(GunMod.EXPLOSIVES), true));
     //public static final RegistryObject<Item> MK23 = REGISTER.register("mk23", () -> new TimelessPistolGunItem(properties -> properties.group(GunMod.PISTOL)));
-    //public static final RegistryObject<Item> QBZ_191 = REGISTER.register("qbz_191", () -> new TimelessGunItem(properties -> properties.group(GunMod.RIFLE), GunModifiers.QBZ_191_MOD));
+    public static final RegistryObject<Item> QBZ_191 = REGISTER.register("qbz_191", () -> new TimelessGunItem(properties -> properties.group(GunMod.RIFLE), GunModifiers.QBZ_191_MOD));
     //public static final RegistryObject<Item> C96 = REGISTER.register("c96", () -> new TimelessPistolGunItem(properties -> properties.group(GunMod.PISTOL)));
     //public static final RegistryObject<Item> STEN_OSS = REGISTER.register("sten_mk_ii_oss", () -> new TimelessGunItem(properties -> properties.group(GunMod.SMG), GunModifiers.STEN_OSS_MOD));
     //public static final RegistryObject<Item> ESPADON = REGISTER.register("espadon", () -> new TimelessGunItem(properties -> properties.group(GunMod.SNIPER), GunModifiers.ESPADON_MOD));
@@ -108,18 +108,18 @@ public class ModItems
     //public static final RegistryObject<Item> MAGNUM_BULLET = REGISTER.register("magnumround", TimelessAmmoItem::new);
     public static final RegistryObject<Item> BULLET_45 = REGISTER.register("round45", TimelessAmmoItem::new);
     public static final RegistryObject<Item> BULLET_50AE = REGISTER.register("ae50", TimelessAmmoItem::new);
-    public static final RegistryObject<Item> BULLET_30_WIN = REGISTER.register("win_30-30", TimelessAmmoItem::new);
+    public static final RegistryObject<Item> BULLET_30_WIN = REGISTER.register("win_30-30", TimelessLRFAmmoItem::new);
     public static final RegistryObject<Item> BULLET_308 = REGISTER.register("bullet_308", TimelessAmmoItem::new);
     public static final RegistryObject<Item> BULLET_556 = REGISTER.register("nato_556_bullet", TimelessAmmoItem::new);
     public static final RegistryObject<Item> BULLET_9 = REGISTER.register("9mm_round", TimelessAmmoItem::new);
-    public static final RegistryObject<Item> BULLET_10g = REGISTER.register("10_gauge_round", TimelessAmmoItem::new);
+    public static final RegistryObject<Item> BULLET_10g = REGISTER.register("10_gauge_round", TimelessSGAmmoItem::new);
     public static final RegistryObject<Item> BULLET_58x42 = REGISTER.register("58x42", TimelessAmmoItem::new);
     public static final RegistryObject<Item> BULLET_762x25 = REGISTER.register("762x25", TimelessAmmoItem::new);
     public static final RegistryObject<Item> BULLET_762x54 = REGISTER.register("762x54", TimelessAmmoItem::new);
     public static final RegistryObject<Item> BULLET_762x39 = REGISTER.register("762x39", TimelessAmmoItem::new);
-    public static final RegistryObject<Item> BULLET_50_BMG = REGISTER.register("50bmg", TimelessAmmoItem::new);
+    public static final RegistryObject<Item> BULLET_50_BMG = REGISTER.register("50bmg", TimelessRFAmmoItem::new);
     //public static final RegistryObject<Item> BULLET_300MAG = REGISTER.register("762x39", TimelessAmmoItem::new);
-    public static final RegistryObject<Item> BULLET_LAPUA338 = REGISTER.register("lapua338", TimelessAmmoItem::new);
+    public static final RegistryObject<Item> BULLET_LAPUA338 = REGISTER.register("lapua338", TimelessRFAmmoItem::new);
     //public static final RegistryObject<Item> GRENADE_40MM = REGISTER.register("grenade40mm", TimelessAmmoItem::new);
     public static final RegistryObject<Item> BULLET_68 = REGISTER.register("bullet68", TimelessAmmoItem::new);
 
@@ -135,7 +135,7 @@ public class ModItems
             () -> new ScopeItem(Scope.create(new ScopeZoomData[]{new ScopeZoomData(0.00F,0.00F)},  2.635F,0.325, "aimpoint2",GunModifiers.AIMPOINT_T1_SIGHT_ADS).viewFinderOffset(0.39).viewFinderOffsetSpecial(0.39),
                     new Item.Properties().maxStackSize(1).group(GunMod.GROUP)));
     public static final RegistryObject<Item> AIMPOINT_T1_SIGHT = REGISTER.register("aimpoint_t1",
-            () -> new ScopeItem(Scope.create(new ScopeZoomData[]{new ScopeZoomData(0.00F,0.00F)}, 1.3F,0.325, "aimpoint1",GunModifiers.AIMPOINT_T1_SIGHT_ADS).viewFinderOffset(0.39).viewFinderOffsetSpecial(0.39),
+            () -> new ScopeItem(Scope.create(new ScopeZoomData[]{new ScopeZoomData(0.00F,0.00F)}, 1.3F,0.325, "aimpoint1",GunModifiers.AIMPOINT_T1_SIGHT_ADS).viewFinderOffset(0.45).viewFinderOffsetSpecial(0.45),
                     new Item.Properties().maxStackSize(1).group(GunMod.GROUP)));
     public static final RegistryObject<Item> EOTECH_N_SIGHT = REGISTER.register("eotech_n", () -> new ScopeItem(Scope.create(new ScopeZoomData[]{new ScopeZoomData(0.00F,0.00F)}, 2.225F,0.325, "eotechn",GunModifiers.EOTECH_N_SIGHT_ADS).viewFinderOffset(0.415).viewFinderOffsetSpecial(0.415), new Item.Properties().maxStackSize(1).group(GunMod.GROUP)));
     public static final RegistryObject<Item> VORTEX_UH_1 = REGISTER.register("vortex_uh_1",
@@ -204,8 +204,8 @@ public class ModItems
     //public static final RegistryObject<Item> CARDBOARD_ARMOR_FUN = REGISTER.register("cardboard_armor", () -> new ArmorRigItem(2, new Item.Properties().maxStackSize(1).group(GunMod.GROUP)));
 
 
-    public static final RegistryObject<Item> LIGHT_ARMOR_REPAIR_PLATE = REGISTER.register("light_armor_plate", () -> new ArmorPlateItem(new Item.Properties().maxStackSize(6).group(GunMod.GROUP)));
+    public static final RegistryObject<Item> LIGHT_ARMOR_REPAIR_PLATE = REGISTER.register("light_armor_plate", () -> new ArmorPlateItem(new Item.Properties().maxStackSize(12).group(GunMod.GROUP)));
 
     public static final RegistryObject<Item> MODULE = REGISTER.register("module_item",
-            () -> new Item(new Item.Properties().maxStackSize(3).group(GunMod.GROUP)));
+            () -> new Item(new Item.Properties().maxStackSize(64).group(GunMod.GROUP)));
 }

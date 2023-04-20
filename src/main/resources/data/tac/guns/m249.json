@@ -1,11 +1,8 @@
 {
   "general": {
     "auto": true,
-    "rate": 2,
-    "rateSelector": [
-      0,
-      2
-    ],
+    "rate": 800,
+    "rateSelector": [2],
     "gripType": "tac:two_handed_m60",
     "recoilAngle": 1.475,
     "recoilKick": 0.85,
@@ -14,35 +11,42 @@
     "cameraRecoilModifier": 0.85,
     "weaponRecoilOffset": 0.98,
     "recoilDuration": 0.205,
-    "alwaysSpread": true,
-    "spread": 2.5,
-    "weightKilo": 8.25
+    "weightKilo": 8.25,
+
+    "spread": 0.495,
+    "firstShotSpread": 0.095,
+    "hipFireInaccuracy": 6.45,
+    "projToMinAccuracy": 17,
+    "msToAccuracyReset": 750,
+    "movementInaccuracy": 0.45
   },
   "reloads": {
     "magFed": true,
-    "maxAmmo": 200,
+    "maxAmmo": 75,
     "reloadMagTimer": 110,
-    "additionalReloadEmptyMagTimer": -12,
-    "maxAdditionalAmmoPerOC": [0, 0, 0],
+    "additionalReloadEmptyMagTimer": 12,
+    "maxAdditionalAmmoPerOC": [25, 50, 75],
     "preReloadPauseTicks": 18,
     "openBolt": true
   },
   "projectile": {
     "item": "tac:nato_556_bullet",
     "visible": false,
-    "damage": 6,
-    "size": 0.2,
-    "speed": 38.5,
-    "life": 6
+    "damage": 6.5,
+    "size": 0.125,
+    "speed": 27.5,
+    "trailLengthMultiplier": 2.75,
+    "life": 14
   },
   "sounds": {
-    "fire": "tac:item.fire_m60",
+    "fire": "tac:item.m249_fire",
     "reloadNormal": "tac:animation.m249_reload_norm",
     "reloadEmpty": "tac:animation.m249_reload_empty",
     "draw": "tac:animation.m249_draw",
     "inspect": "tac:animation.m249_inspect",
+    "inspectEmpty": "tac:animation.m249_inspect_empty",
     "cock": "tac:item.pistol.cock",
-    "silencedFire": "tac:item.pistol.silenced_fire"
+    "silencedFire": "tac:item.m249_fire_s"
   },
   "display": {
     "flash": {

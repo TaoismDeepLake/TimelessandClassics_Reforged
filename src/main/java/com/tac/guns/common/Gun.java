@@ -643,7 +643,7 @@ public final class Gun implements INBTSerializable<CompoundNBT>
         @Optional
         private float damage;
         @Ignored
-        private float size = 0.2f;
+        private float size = 0.1f;
         @Optional
         private double speed;
         @Optional
@@ -935,6 +935,10 @@ public final class Gun implements INBTSerializable<CompoundNBT>
         @Optional
         @Nullable
         @TGExclude
+        private ResourceLocation inspectEmpty;
+        @Optional
+        @Nullable
+        @TGExclude
         private ResourceLocation cock;
         @Optional
         @Nullable
@@ -968,6 +972,10 @@ public final class Gun implements INBTSerializable<CompoundNBT>
             if(draw != null)
             {
                 tag.putString("Draw", this.draw.toString());
+            }
+            if(inspectEmpty != null)
+            {
+                tag.putString("InspectEmpty", this.inspectEmpty.toString());
             }
             if(inspect != null)
             {
@@ -1030,6 +1038,9 @@ public final class Gun implements INBTSerializable<CompoundNBT>
             if(tag.contains("Draw", Constants.NBT.TAG_STRING)){
                 this.draw = this.createSound(tag, "Draw");
             }
+            if(tag.contains("InspectEmpty", Constants.NBT.TAG_STRING)){
+                this.inspectEmpty = this.createSound(tag, "InspectEmpty");
+            }
             if(tag.contains("Inspect", Constants.NBT.TAG_STRING)){
                 this.inspect = this.createSound(tag, "Inspect");
             }
@@ -1065,6 +1076,7 @@ public final class Gun implements INBTSerializable<CompoundNBT>
             sounds.silencedFire = this.silencedFire;
             sounds.reloadEmpty = this.reloadEmpty;
             sounds.draw = this.draw;
+            sounds.inspectEmpty = this.inspectEmpty;
             sounds.inspect = this.inspect;
             sounds.reloadNormal = this.reloadNormal;
             sounds.pump = this.pump;
@@ -1131,6 +1143,8 @@ public final class Gun implements INBTSerializable<CompoundNBT>
         @Nullable
         public ResourceLocation getDraw() { return this.draw; }
 
+        @Nullable
+        public ResourceLocation getInspectEmpty() { return this.inspectEmpty; }
         /**
          * @return The registry id of the sound event when inspecting.
          */
@@ -1218,7 +1232,6 @@ public final class Gun implements INBTSerializable<CompoundNBT>
         {
             private double size = 0.5;
             private double smokeSize = 2.0;
-
             private double trailAdjust = 1.15;
 
             @Override

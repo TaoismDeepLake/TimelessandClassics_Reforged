@@ -50,23 +50,6 @@ public class fn_fal_animation implements IOverrideModel {
                 RenderUtil.renderModel(SpecialModels.FN_FAL_MOUNT.getModel(), stack, matrices, renderBuffer, light, overlay);
             }
 
-            if(Gun.getAttachment(IAttachment.Type.STOCK, stack).getItem() == ModItems.TACTICAL_STOCK.orElse(ItemStack.EMPTY.getItem()))
-            {
-                RenderUtil.renderModel(SpecialModels.FN_FAL_BUTT_TACTICAL.getModel(), stack, matrices, renderBuffer, light, overlay);
-            }
-            else if(Gun.getAttachment(IAttachment.Type.STOCK, stack).getItem() == ModItems.LIGHT_STOCK.orElse(ItemStack.EMPTY.getItem()))
-            {
-                RenderUtil.renderModel(SpecialModels.FN_FAL_BUTT_LIGHTWEIGHT.getModel(), stack, matrices, renderBuffer, light, overlay);
-            }
-            else if(Gun.getAttachment(IAttachment.Type.STOCK, stack).getItem() == ModItems.WEIGHTED_STOCK.orElse(ItemStack.EMPTY.getItem()))
-            {
-                RenderUtil.renderModel(SpecialModels.FN_FAL_BUTT_HEAVY.getModel(), stack, matrices, renderBuffer, light, overlay);
-            }
-            else
-            {
-                RenderUtil.renderModel(SpecialModels.FN_FAL_DEFAULT_STOCK.getModel(), stack, matrices, renderBuffer, light, overlay);
-            }
-
             if(Gun.getAttachment(IAttachment.Type.UNDER_BARREL, stack) == ItemStack.EMPTY && Gun.getAttachment(IAttachment.Type.SIDE_RAIL, stack) == ItemStack.EMPTY)
             {
                 RenderUtil.renderModel(SpecialModels.FN_FAL_STANDARD_HANDGUARD.getModel(), stack, matrices, renderBuffer, light, overlay);

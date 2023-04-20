@@ -76,8 +76,6 @@ public class hk416_a5_animation implements IOverrideModel {
                 if(transformType.isFirstPerson()) {
                     Gun gun = ((GunItem) stack.getItem()).getGun();
                     float cooldownOg = ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1 : ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
-
-
                     if (Gun.hasAmmo(stack)) {
                         // Math provided by Bomb787 on GitHub and Curseforge!!!
                         matrices.translate(0, 0, 0.205f * (-4.5 * Math.pow(cooldownOg - 0.5, 2) + 1.0));
@@ -109,13 +107,13 @@ public class hk416_a5_animation implements IOverrideModel {
         //if(controller.isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_NORMAL)) {
             matrices.push();
             {
-                if(transformType.isFirstPerson()/* && HK416A5AnimationController.getInstance().isAnimationRunning()*/) {
-                controller.applySpecialModelTransform(SpecialModels.HK416_A5_BODY.getModel(), HK416A5AnimationController.INDEX_EXTRA_MAGAZINE, transformType, matrices);
-                if (EnchantmentHelper.getEnchantmentLevel(ModEnchantments.OVER_CAPACITY.get(), stack) > 0) {
-                    RenderUtil.renderModel(SpecialModels.HK416_A5_EXTRA_EXTENDED_MAG.getModel(), stack, matrices, renderBuffer, light, overlay);
-                } else {
-                    RenderUtil.renderModel(SpecialModels.HK416_A5_EXTRA_MAG.getModel(), stack, matrices, renderBuffer, light, overlay);
-                }
+                if(transformType.isFirstPerson() && HK416A5AnimationController.getInstance().isAnimationRunning()) {
+                    controller.applySpecialModelTransform(SpecialModels.HK416_A5_BODY.getModel(), HK416A5AnimationController.INDEX_EXTRA_MAGAZINE, transformType, matrices);
+                    if (EnchantmentHelper.getEnchantmentLevel(ModEnchantments.OVER_CAPACITY.get(), stack) > 0) {
+                        RenderUtil.renderModel(SpecialModels.HK416_A5_EXTRA_EXTENDED_MAG.getModel(), stack, matrices, renderBuffer, light, overlay);
+                    } else {
+                        RenderUtil.renderModel(SpecialModels.HK416_A5_EXTRA_MAG.getModel(), stack, matrices, renderBuffer, light, overlay);
+                    }
                 }
             }
             matrices.pop();

@@ -124,15 +124,12 @@ public class BulletTrailRenderingHandler
      */
     private void renderBulletTrail(BulletTrail bulletTrail, MatrixStack matrixStack, float partialTicks)
     {
-        if(!Config.CLIENT.display.showFirstPersonBulletTrails.get())
-            return;
-
         Minecraft mc = Minecraft.getInstance();
         Entity entity = mc.getRenderViewEntity();
-        if(entity == null || bulletTrail.isDead())
+        if(entity == null || bulletTrail.isDead() || !Config.CLIENT.display.showBulletTrails.get())
             return;
-        /*if(!AimingHandler.get().isAiming() && bulletTrail.getAge() < 1)
-            return;*/
+        if(!Config.CLIENT.display.showFirstPersonBulletTrails.get() && Minecraft.getInstance().player.isEntityEqual(entity))
+            return;
         matrixStack.push();
         Vector3d view = mc.gameRenderer.getActiveRenderInfo().getProjectedView();
         Vector3d position = bulletTrail.getPosition();
@@ -145,10 +142,12 @@ public class BulletTrailRenderingHandler
         Vector3d motionVec = new Vector3d(motion.x, motion.y, motion.z);
         float length = (float) motionVec.length();
 
-        if(mc.player.getLookVec().y > 0.975) // max 1.0
-            length *=0.25;
-        if(mc.player.getLookVec().y > 0.385)
-            matrixStack.translate(0, -0.115f*mc.player.getLookVec().y, 0);
+        if(Minecraft.getInstance().player.isEntityEqual(entity)) {
+            if (mc.player.getLookVec().y > 0.945) // max 1.0
+                length *= 0.25;
+            else if (mc.player.getLookVec().y > 0.385)
+                matrixStack.translate(0, -0.115f * mc.player.getLookVec().y, 0);
+        }
 
         if(ShootingHandler.get().isShooting() && Minecraft.getInstance().player.isEntityEqual(entity) && bulletTrail.getAge() < 1)
         {
@@ -163,8 +162,6 @@ public class BulletTrailRenderingHandler
 
         }
         matrixStack.rotate(Vector3f.YP.rotationDegrees(bulletTrail.getYaw()));
-        /*if(!AimingHandler.get().isAiming())
-            matrixStack.rotate(Vector3f.ZP.rotationDegrees(mc.player.getYaw(partialTicks) - (mc.player.getYaw(partialTicks)+0.75f)));*/
         matrixStack.rotate(Vector3f.XP.rotationDegrees(-bulletTrail.getPitch() + 90.105f));
 
 
@@ -172,13 +169,19 @@ public class BulletTrailRenderingHandler
         float red = (float) (bulletTrail.getTrailColor() >> 16 & 255) / 255.0F;
         float green = (float) (bulletTrail.getTrailColor() >> 8 & 255) / 255.0F;
         float blue = (float) (bulletTrail.getTrailColor() & 255) / 255.0F;
-        float alpha = 0.285F;
+        float alpha = Config.CLIENT.display.bulletTrailOpacity.get().floatValue();
 
         // Prevents the trail length from being longer than the distance to shooter
         Entity shooter = bulletTrail.getShooter();
-        if(shooter != null)
+        if(shooter != null && Minecraft.getInstance().player.isEntityEqual(shooter))
         {
-            trailLength = (float) Math.min(trailLength+0.6f, shooter.getEyePosition(partialTicks).distanceTo(new Vector3d(bulletX,bulletY, bulletZ))/1.0775f); ///1.1125f TODO: Add another value per trail to help give a maximum to player eyes distance
+            if(AimingHandler.get().getNormalisedAdsProgress() > 0.4)
+            {
+                trailLength = (float) Math.min(trailLength+0.6f, shooter.getEyePosition(partialTicks).distanceTo(new Vector3d(bulletX,bulletY, bulletZ))/1.175f);
+            }
+            else
+                trailLength = (float) Math.min(trailLength+0.6f, shooter.getEyePosition(partialTicks).distanceTo(new Vector3d(bulletX,bulletY, bulletZ))/1.0975f); ///1.1125f TODO: Add another value per trail to help give a maximum to player eyes
+            // distance
         }
 
         Matrix4f matrix4f = matrixStack.getLast().getMatrix();
@@ -193,7 +196,7 @@ public class BulletTrailRenderingHandler
 
             // all 0.2f works
             //0.6f static
-            float posSize = 0.2f;
+            float posSize = 0.1f;
             posSize *= bulletTrail.getSize()*10;
 
             builder.pos(matrix4f, 0, trailLength/1.325f, 0).color(red, green, blue, alpha).lightmap(15728880).endVertex();

@@ -70,19 +70,22 @@ public class Config
     {
         public final ForgeConfigSpec.BooleanValue oldAnimations;
         public final ForgeConfigSpec.ConfigValue<String> crosshair;
-
         public final ForgeConfigSpec.BooleanValue weaponAmmoBar;
-
         public final ForgeConfigSpec.BooleanValue gameplayEnchancedScopeOffset;
         public final ForgeConfigSpec.BooleanValue scopeDoubleRender;
         public final ForgeConfigSpec.BooleanValue redDotSquishUpdate;
         public final ForgeConfigSpec.BooleanValue sight1xRealisticPosition;
-
         public final ForgeConfigSpec.IntValue cameraShakeOnHit;
         public final ForgeConfigSpec.BooleanValue cameraShakeOptionGlobal;
         public final ForgeConfigSpec.BooleanValue cameraShakeOnFire;
-
+        public final ForgeConfigSpec.BooleanValue weaponDelayedSway;
         public final ForgeConfigSpec.BooleanValue showFirstPersonBulletTrails;
+        public final ForgeConfigSpec.DoubleValue weaponDelayedSwayMaximum;
+        public final ForgeConfigSpec.DoubleValue weaponDelayedSwayMultiplier;
+        public final ForgeConfigSpec.BooleanValue weaponDelayedSwayDirection;
+        public final ForgeConfigSpec.BooleanValue weaponDelayedSwayYNOptical;
+        public final ForgeConfigSpec.BooleanValue showBulletTrails;
+        public final ForgeConfigSpec.DoubleValue bulletTrailOpacity;
         public Display(ForgeConfigSpec.Builder builder)
         {
             builder.comment("Configuration for display related options").push("display");
@@ -90,7 +93,7 @@ public class Config
                 this.oldAnimations = builder.comment("If true, uses the old animation poses for weapons. This is only for nostalgic reasons and not recommended to switch back.").define("oldAnimations", false);
                 this.crosshair = builder.comment("The custom crosshair to use for weapons. Go to (Options > Controls > Mouse Settings > Crosshair) in game to change this!").define("crosshair", Crosshair.DEFAULT.getLocation().toString());
 
-                this.weaponAmmoBar = builder.comment("Show % of your ammo in your gun via a colored durability bar!, Set to false to remove bar entirely for more realistic gameplay!").define("weaponAmmoBar", false);
+                this.weaponAmmoBar = builder.comment("Show % of your ammo in your gun via a colored durability bar. Set to false to remove bar entirely for more realistic gameplay").define("weaponAmmoBar", false);
 
                 this.gameplayEnchancedScopeOffset = builder.comment("Scopes are brought closer to the shooter to help fill FOV with a scope view at all times").define("gameplayEnchancedScopeOffset", true);
                 this.scopeDoubleRender = builder.comment("Enable picture in picture rendering for scopes, saves on some performance and issues with Optifine").define("scopeDoubleRender", true);
@@ -102,6 +105,16 @@ public class Config
                 this.cameraShakeOnFire = builder.comment("Shake camera when firing the weapon, currently in beta but will be expanded on in the future, if it causes vomit, DISABLE, else enjoy!").define("cameraShakeOnFire", true);
 
                 this.showFirstPersonBulletTrails = builder.comment("Attempt to show bullet trails from your own gun, currently ALPHA, doesn't map to the barrel of weapons and maybe distracting.").define("showFirstPersonBulletTrails", true);
+
+                this.weaponDelayedSway = builder.comment("When looking around the weapon sways smoothly in delay with the camera movement. Disable if distracting with scopes.").define("weaponDelayedSway", true);
+
+                this.weaponDelayedSwayMaximum = builder.comment("Maximum degrees the weapon's delayed sway can rotate the weapon.").defineInRange("weaponDelayedSwayMaximum", 3.35, 0.5, 10.0);
+                this.weaponDelayedSwayMultiplier = builder.comment("Adjusts the sensitivity of the weapon's delayed sway, depending on mouse / head, movement.").defineInRange("weaponDelayedSwayMultiplier", -0.1, -0.4, -0.05);
+                this.weaponDelayedSwayDirection = builder.comment("If true, the weapon will drag against the aiming point, false will drag the aiming point on sway.").define("weaponDelayedSwayDirection", false);
+                this.weaponDelayedSwayYNOptical = builder.comment("If true, the weapon will drag against the aiming point ONLY if an optic is added.").define("weaponDelayedSwayYNOptical", false);
+
+                this.showBulletTrails = builder.comment("Choose to see any bullet trails, trails by you or any other player / bot will not appear. Helps with Shader compatability.").define("showBulletTrails", true);
+                this.bulletTrailOpacity = builder.comment("Adjusts the opacity, AKA how see through the bullet trails are seen as, higher values can be seen better indoors or at daytime.").defineInRange("bulletTrailOpacity", 0.5, 0.1, 1.0);
             }
             builder.pop();
         }
@@ -320,7 +333,7 @@ public class Config
     public static class Gameplay
     {
         public final ForgeConfigSpec.BooleanValue enableGunGriefing;
-        public final ForgeConfigSpec.DoubleValue growBoundingBoxAmount;
+        public final ForgeConfigSpec.DoubleValue growBoundingBoxAmountV2;
         public final ForgeConfigSpec.BooleanValue enableHeadShots;
         public final ForgeConfigSpec.DoubleValue headShotDamageMultiplier;
         public final ForgeConfigSpec.DoubleValue criticalDamageMultiplier;
@@ -349,16 +362,17 @@ public class Config
             builder.comment("Properties relating to gameplay").push("gameplay");
             {
                 this.enableGunGriefing = builder.comment("If enable, allows guns to shoot out glass and remove blocks on explosions").define("enableGunGriefing", true);
-                this.growBoundingBoxAmount = builder.comment("The extra amount to expand an entity's bounding box when checking for projectile collision. Setting this value higher will make it easier to hit entities").defineInRange("growBoundingBoxAmount", 0.3, 0.0, 1.0);
+                this.growBoundingBoxAmountV2 = builder.comment("The extra amount to expand an entity's bounding box when checking for projectile collision. Setting this value higher will make it easier to hit entities").defineInRange(
+                        "growBoundingBoxAmountV2", 0.0, 0.0, 1.0);
                 this.enableHeadShots = builder.comment("Enables the check for head shots for players. Projectiles that hit the head of a player will have increased damage.").define("enableHeadShots", true);
-                this.headShotDamageMultiplier = builder.comment("The value to multiply the damage by if projectile hit the players head").defineInRange("headShotDamageMultiplier", 1.25, 1.0, Double.MAX_VALUE);
-                this.criticalDamageMultiplier = builder.comment("The value to multiply the damage by if projectile is a critical hit").defineInRange("criticalDamageMultiplier", 1.5, 1.0, Double.MAX_VALUE);
+                this.headShotDamageMultiplier = builder.comment("The value to multiply the damage by if projectile hit the players head").defineInRange("headShotDamageMultiplier", 2.0, 1.0, Double.MAX_VALUE);
+                this.criticalDamageMultiplier = builder.comment("The value to multiply the damage by if projectile is a critical hit").defineInRange("criticalDamageMultiplier", 2.0, 1.0, Double.MAX_VALUE);
                 this.ignoreLeaves = builder.comment("If true, projectiles will ignore leaves when checking for collision").define("ignoreLeaves", true);
                 this.enableKnockback = builder.comment("If true, projectiles will cause knockback when an entity is hit. By default this is set to true to match the behaviour of Minecraft.").define("enableKnockback", true);
                 this.knockbackStrength = builder.comment("Sets the strength of knockback when shot by a bullet projectile. Knockback must be enabled for this to take effect. If value is equal to zero, knockback will use default minecraft value").defineInRange("knockbackStrength", 0.15, 0.0, 1.0);
                 this.improvedHitboxes = builder.comment("If true, improves the accuracy of weapons by considering the ping of the player. This has no affect on singleplayer. This will add a little overhead if enabled.").define("improvedHitboxes", false);
 
-                this.safetyExistence = builder.comment("Enables the safe mode on weapons, false completely nullifies the existence of the safety").define("safetyExistence", true);
+                this.safetyExistence = builder.comment("Enables the safe mode on weapons, false completely nullifies the existence of the safety").define("safetyExistence", false);
 
                 this.realisticLowPowerFovHandling = builder.comment("Optics with 0 fov modification will not affect the players fov at all").define("realisticLowPowerFovHandling", false);
                 this.realisticIronSightFovHandling = builder.comment("Iron sights fov modification will not affect the players fov at all").define("realisticIronSightFovHandling", false);

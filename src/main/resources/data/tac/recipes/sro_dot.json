@@ -9,15 +9,14 @@
     },
     {
       "item": {
-        "tag": "forge:glass_panes"
+        "tag": "forge:glass_panes/colorless"
       },
-      "count": 12
+      "count": 6
     },
     {
       "item": {
         "tag": "forge:storage_blocks/redstone"
-      },
-      "count": 2
+      }
     }
   ],
   "result": {
