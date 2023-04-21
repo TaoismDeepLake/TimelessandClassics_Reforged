@@ -74,6 +74,13 @@ public class m249_animation implements IOverrideModel {
         }
         matrices.pop();
 
+        matrices.push();
+        {
+            controller.applySpecialModelTransform(SpecialModels.M249.getModel(),M249AnimationController.INDEX_ROTATE,transformType,matrices);
+            RenderUtil.renderModel(SpecialModels.M249_ROTATE.getModel(), stack, matrices, renderBuffer, light, overlay);
+        }
+        matrices.pop();
+
         PlayerHandAnimation.render(controller,transformType,matrices,renderBuffer,light);
     }
 }
