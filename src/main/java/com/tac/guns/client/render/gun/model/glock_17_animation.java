@@ -85,13 +85,15 @@ public class glock_17_animation implements IOverrideModel {
         //Always pop
         matrices.pop();
 
-        matrices.push();
-        {
-            controller.applySpecialModelTransform(SpecialModels.GLOCK_17.getModel(), Glock17AnimationController.INDEX_MAG, transformType, matrices);
-            RenderUtil.renderModel(SpecialModels.GLOCK_17_BULLET.getModel(), stack, matrices, renderBuffer, light, overlay);
+        if(controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_NORMAL).equals(controller.getPreviousAnimation()) ) {
+            matrices.push();
+            {
+                controller.applySpecialModelTransform(SpecialModels.GLOCK_17.getModel(), Glock17AnimationController.INDEX_MAG, transformType, matrices);
+                RenderUtil.renderModel(SpecialModels.GLOCK_17_BULLET.getModel(), stack, matrices, renderBuffer, light, overlay);
+            }
+            matrices.pop();
+            PlayerHandAnimation.render(controller, transformType, matrices, renderBuffer, light);
         }
-        matrices.pop();
-        PlayerHandAnimation.render(controller,transformType,matrices,renderBuffer,light);
     }
      
 
