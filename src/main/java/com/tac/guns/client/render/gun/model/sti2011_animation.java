@@ -75,8 +75,6 @@ public class sti2011_animation implements IOverrideModel {
                     }
                 }
             }
-            matrices.translate(0.00, 0.0, 0.035);
-            matrices.translate(0.00, 0.0, -0.008);
             RenderUtil.renderModel(SpecialModels.STI2011_SLIDE.getModel(), stack, matrices, renderBuffer, light, overlay);
         }
         matrices.pop();
