@@ -198,11 +198,17 @@
          ]
       },
    "item.sigmcx_fire": {
-            "subtitle": "subtitle.tac.sigmcx_fire",
-            "sounds": [
-               { "name": "tac:item/sigmcx_fire" }
-            ]
-         },
+      "subtitle": "subtitle.tac.sigmcx_fire",
+      "sounds": [
+         { "name": "tac:item/sigmcx_fire" }
+      ]
+   },
+   "item.sigmcx_fire_s": {
+      "subtitle": "subtitle.tac.sigmcx_fire_s",
+      "sounds": [
+         { "name": "tac:item/sigmcx_fire_s" }
+      ]
+   },
    "item.sks_fire": {
       "subtitle": "subtitle.tac.sks_fire",
       "sounds": [
@@ -1308,6 +1314,37 @@
       "subtitle": "animation.m4_reload_norm",
       "sounds": [
          { "name": "tac:animation/m4_reload_norm"}
+      ]
+   },
+
+   "animation.sig_mcx_spear_draw": {
+      "subtitle": "animation.sig_mcx_spear_draw",
+      "sounds": [
+         { "name": "tac:animation/sig_mcx_spear_draw"}
+      ]
+   },
+   "animation.sig_mcx_spear_reload_empty": {
+      "subtitle": "animation.sig_mcx_spear_reload_empty",
+      "sounds": [
+         { "name": "tac:animation/sig_mcx_spear_reload_empty"}
+      ]
+   },
+   "animation.sig_mcx_spear_inspect": {
+      "subtitle": "animation.sig_mcx_spear_inspect",
+      "sounds": [
+         { "name": "tac:animation/sig_mcx_spear_inspect"}
+      ]
+   },
+   "animation.sig_mcx_spear_inspect_empty": {
+      "subtitle": "animation.sig_mcx_spear_inspect_empty",
+      "sounds": [
+         { "name": "tac:animation/sig_mcx_spear_inspect_empty"}
+      ]
+   },
+   "animation.sig_mcx_spear_reload_norm": {
+      "subtitle": "animation.sig_mcx_spear_reload_norm",
+      "sounds": [
+         { "name": "tac:animation/sig_mcx_spear_reload_norm"}
       ]
    },
 

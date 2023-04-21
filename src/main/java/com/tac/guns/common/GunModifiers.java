@@ -556,7 +556,7 @@ public class GunModifiers
         @Override
         public double modifyFireSoundRadius(double radius)
         {
-            return radius * 0.325;
+            return radius * 0.225;
         }
 
         @Override

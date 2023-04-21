@@ -1,7 +1,7 @@
 {
   "general": {
     "auto": true,
-    "rate": 800,
+    "rate": 600,
     "rateSelector": [2],
     "gripType": "tac:two_handed_m60",
     "recoilAngle": 1.475,
@@ -22,17 +22,17 @@
   },
   "reloads": {
     "magFed": true,
-    "maxAmmo": 75,
+    "maxAmmo": 80,
     "reloadMagTimer": 100,
     "additionalReloadEmptyMagTimer": 24,
-    "maxAdditionalAmmoPerOC": [25, 50, 75],
+    "maxAdditionalAmmoPerOC": [40, 70, 120],
     "preReloadPauseTicks": 18,
     "openBolt": true
   },
   "projectile": {
     "item": "tac:nato_556_bullet",
     "visible": false,
-    "damage": 6.5,
+    "damage": 7.0,
     "size": 0.125,
     "speed": 27.5,
     "trailLengthMultiplier": 2.75,
