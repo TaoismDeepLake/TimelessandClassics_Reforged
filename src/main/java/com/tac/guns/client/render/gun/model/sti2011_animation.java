@@ -54,17 +54,6 @@ public class sti2011_animation implements IOverrideModel {
 
         matrices.push();
         {
-            controller.applySpecialModelTransform(SpecialModels.STI2011_BODY.getModel(),STI2011AnimationController.INDEX_MAG,transformType,matrices);
-            if (EnchantmentHelper.getEnchantmentLevel(ModEnchantments.OVER_CAPACITY.get(), stack) > 0) {
-                RenderUtil.renderModel(SpecialModels.STI2011_EXTENDED_MAG.getModel(), stack, matrices, renderBuffer, light, overlay);
-            } else {
-                RenderUtil.renderModel(SpecialModels.STI2011_STANDARD_MAG.getModel(), stack, matrices, renderBuffer, light, overlay);
-            }
-        }
-        matrices.pop();
-
-        matrices.push();
-        {
             if(transformType.isFirstPerson()) {
                 controller.applySpecialModelTransform(SpecialModels.STI2011_BODY.getModel(), STI2011AnimationController.INDEX_SLIDE, transformType, matrices);
                 Gun gun = ((GunItem) stack.getItem()).getGun();
@@ -128,7 +117,7 @@ public class sti2011_animation implements IOverrideModel {
 
         matrices.push();
         {
-            controller.applySpecialModelTransform(SpecialModels.STI2011_BODY.getModel(), STI2011AnimationController.INDEX_BULLET1,transformType,matrices);
+            controller.applySpecialModelTransform(SpecialModels.STI2011_BODY.getModel(), STI2011AnimationController.INDEX_BULLET1, transformType, matrices);
             RenderUtil.renderModel(SpecialModels.STI2011_BULLET1.getModel(), stack, matrices, renderBuffer, light, overlay);
         }
         matrices.pop();
