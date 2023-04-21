@@ -3,6 +3,7 @@ package com.tac.guns.client.render.gun.model;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.tac.guns.Config;
 import com.tac.guns.client.SpecialModels;
+import com.tac.guns.client.handler.GunRenderingHandler;
 import com.tac.guns.client.handler.ShootingHandler;
 import com.tac.guns.client.render.animation.RPKAnimationController;
 import com.tac.guns.client.render.animation.SKSTacticalAnimationController;
@@ -102,11 +103,12 @@ public class sks_tactical_animation implements IOverrideModel {
                 if (Gun.hasAmmo(stack) || shouldOffset) {
                     // Math provided by Bomb787 on GitHub and Curseforge!!!
                     matrices.translate(0, 0, 0.245f * (-4.5 * Math.pow(cooldownOg - 0.5, 2) + 1.0));
+                    GunRenderingHandler.get().opticMovement = 0.245f * (-4.5 * Math.pow(cooldownOg - 0.5, 2) + 1.0);
                 } else if (!Gun.hasAmmo(stack)) {
                     matrices.translate(0, 0, 0.245f * (-4.5 * Math.pow(0.5 - 0.5, 2) + 1.0));
+                    GunRenderingHandler.get().opticMovement = 0.245f * (-4.5 * Math.pow(cooldownOg - 0.5, 2) + 1.0);
                 }
             }
-            matrices.translate(0, 0, 0.0225f);
             RenderUtil.renderModel(SpecialModels.SKS_TACTICAL_BOLT.getModel(), stack, matrices, renderBuffer, light, overlay);
         }
         matrices.pop();

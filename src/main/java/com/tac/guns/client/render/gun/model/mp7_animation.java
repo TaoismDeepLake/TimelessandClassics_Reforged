@@ -79,7 +79,6 @@ public class mp7_animation implements IOverrideModel {
                 }
             }
         }
-        matrices.translate(0, 0, 0.025F);
         RenderUtil.renderModel(SpecialModels.MP7_BOLT.getModel(), stack, matrices, renderBuffer, light, overlay);
         matrices.pop();
 

@@ -78,7 +78,6 @@ public class micro_uzi_animation implements IOverrideModel {
                     matrices.translate(0,0, -0.25 + Math.pow(cooldownOg - 0.5, 2));
                 }
             }
-            matrices.translate(0.00, 0.0, 0.030);
             RenderUtil.renderModel(SpecialModels.MICRO_UZI_BOLT.getModel(), stack, matrices, renderBuffer, light, overlay);
         }
         matrices.pop();

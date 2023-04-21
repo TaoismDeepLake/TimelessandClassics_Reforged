@@ -134,7 +134,6 @@ public class fn_fal_animation implements IOverrideModel {
                 }
             }
         }
-        matrices.translate(0, 0, 0.025F);
         RenderUtil.renderModel(SpecialModels.FN_FAL_BOLT.getModel(), stack, matrices, renderBuffer, light, overlay);
         matrices.pop();
 
