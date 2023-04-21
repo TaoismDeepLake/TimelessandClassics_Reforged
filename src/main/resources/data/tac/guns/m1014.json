@@ -26,7 +26,7 @@
     "reloadAmount": 1,
     "preReloadPauseTicks": 0,
     "interReloadPauseTicks": 15,
-    "openBolt": false
+    "openBolt": true
   },
   "projectile": {
     "item": "tac:10_gauge_round",
