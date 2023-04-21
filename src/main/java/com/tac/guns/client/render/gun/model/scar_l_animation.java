@@ -110,7 +110,6 @@ public class scar_l_animation implements IOverrideModel {
                     }
                 }
             }
-            matrices.translate(0, 0, 0.025f);
             RenderUtil.renderModel(SpecialModels.SCAR_L_BOLT.getModel(), stack, matrices, renderBuffer, light, overlay);
         }
         matrices.pop();

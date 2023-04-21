@@ -91,10 +91,10 @@ public class aa_12_animation implements IOverrideModel {
         if(transformType.isFirstPerson()) {
             if (Gun.hasAmmo(stack)) {
                 // Math provided by Bomb787 on GitHub and Curseforge!!!
-                matrices.translate(0, 0, -0.215f * (-4.5 * Math.pow(cooldownOg - 0.5, 2) + 1.0));
+                matrices.translate(0, 0, -0.225f * (-4.5 * Math.pow(cooldownOg - 0.5, 2) + 1.0));
             } else if (!Gun.hasAmmo(stack)) {
                 {
-                    matrices.translate(0, 0, -0.215f * (-4.5 * Math.pow(0.5 - 0.5, 2) + 1.0));
+                    matrices.translate(0, 0, -0.225f * (-4.5 * Math.pow(0.5 - 0.5, 2) + 1.0));
                 }
             }
         }

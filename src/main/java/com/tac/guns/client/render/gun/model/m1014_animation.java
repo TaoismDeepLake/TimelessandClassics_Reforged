@@ -62,7 +62,6 @@ public class m1014_animation implements IOverrideModel {
                     }
                 }
             }
-            matrices.translate(0, 0, 0.025f);
             RenderUtil.renderModel(SpecialModels.M1014_BOLT.getModel(), stack, matrices, renderBuffer, light, overlay); // BOLT
         }
         matrices.pop();
