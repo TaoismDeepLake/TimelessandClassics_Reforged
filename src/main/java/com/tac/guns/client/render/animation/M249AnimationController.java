@@ -31,6 +31,7 @@ public class M249AnimationController extends MachineGunAnimationController {
             Animations.load(RELOAD_EMPTY);
             Animations.load(DRAW);
             Animations.load(INSPECT);
+            Animations.load(INSPECT_EMPTY);
             Animations.load(STATIC);
         } catch (IOException e) {
             GunMod.LOGGER.fatal(e.getStackTrace());
@@ -47,6 +48,7 @@ public class M249AnimationController extends MachineGunAnimationController {
     public AnimationMeta getAnimationFromLabel(AnimationLabel label) {
         switch (label){
             case INSPECT: return INSPECT;
+            case INSPECT_EMPTY: return INSPECT_EMPTY;
             case RELOAD_NORMAL: return RELOAD_NORM;
             case DRAW: return DRAW;
             case STATIC: return STATIC;

@@ -66,13 +66,6 @@ public class m1a1_smg_animation implements IOverrideModel {
 
         matrices.push();
         {
-            controller.applySpecialModelTransform(SpecialModels.M1A1_SMG_BODY.getModel(), HkMp5a5AnimationController.INDEX_BOLT,transformType,matrices);
-            RenderUtil.renderModel(SpecialModels.M1A1_SMG_BOLT.getModel(), stack, matrices, renderBuffer, light, overlay);
-        }
-        matrices.pop();
-
-        matrices.push();
-        {
             controller.applySpecialModelTransform(SpecialModels.M1A1_SMG_BODY.getModel(), M1A1AnimationController.INDEX_MAGAZINE, transformType, matrices);
             RenderUtil.renderModel(SpecialModels.M1A1_SMG_BULLET.getModel(), stack, matrices, renderBuffer, light, overlay);
         }

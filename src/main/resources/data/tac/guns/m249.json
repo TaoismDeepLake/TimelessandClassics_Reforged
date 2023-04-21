@@ -4,13 +4,13 @@
     "rate": 600,
     "rateSelector": [2],
     "gripType": "tac:two_handed_m60",
-    "recoilAngle": 1.475,
-    "recoilKick": 1.45,
-    "horizontalRecoilAngle": 1.15,
-    "recoilAdsReduction": 0.2885,
-    "cameraRecoilModifier": 1.05,
-    "weaponRecoilOffset": 0.95,
-    "recoilDuration": 0.225,
+    "recoilAngle": 1.35,
+    "recoilKick": 1.5,
+    "horizontalRecoilAngle": 1.0,
+    "recoilAdsReduction": 0.275,
+    "cameraRecoilModifier": 1.25,
+    "weaponRecoilOffset": 0.75,
+    "recoilDuration": 0.35,
     "weightKilo": 8.25,
 
     "spread": 0.495,
@@ -33,9 +33,9 @@
     "item": "tac:nato_556_bullet",
     "visible": false,
     "damage": 7.0,
-    "size": 0.125,
+    "size": 0.075,
     "speed": 27.5,
-    "trailLengthMultiplier": 2.75,
+    "trailLengthMultiplier": 2.25,
     "life": 14
   },
   "sounds": {
@@ -52,7 +52,8 @@
     "flash": {
       "yOffset": 8.645,
       "zOffset": -23.42,
-      "size": 0.94
+      "size": 0.94,
+      "trailAdjust": 1.5
     },
     "weaponType": 1
   },
@@ -63,8 +64,8 @@
       "zOffset": -5.3
     },"attachments": {
       "scope": {
-        "yOffset": 10.115,
-        "zOffset": 6.3,
+        "yOffset": 10.125,
+        "zOffset": 6.5,
         "scale": 1.00
       },
       "underBarrel": {
