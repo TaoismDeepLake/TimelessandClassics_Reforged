@@ -84,6 +84,8 @@ public class glock_17_animation implements IOverrideModel {
 
         //Always pop
         matrices.pop();
+
+        PlayerHandAnimation.render(controller,transformType,matrices,renderBuffer,light);
     }
      
 
