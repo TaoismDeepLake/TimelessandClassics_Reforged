@@ -593,6 +593,14 @@
          { "name": "tac:item/vector_fire_s" }
       ]
    },
+
+   "item.m1a1_smg_fire": {
+      "subtitle": "subtitle.tac.m1a1_smg_fire",
+      "sounds": [
+         { "name": "tac:item/m1a1_smg_fire" }
+      ]
+   },
+
    "item.m60_fire": {
       "subtitle": "subtitle.tac.m60_fire",
       "sounds": [
@@ -1738,6 +1746,37 @@
       "subtitle": "animation.rpk_reload_empty",
       "sounds": [
          { "name": "tac:animation/rpk_reload_empty"}
+      ]
+   },
+
+   "animation.m1a1_smg_draw": {
+      "subtitle": "animation.m1a1_smg_draw",
+      "sounds": [
+         { "name": "tac:animation/m1a1_smg_draw"}
+      ]
+   },
+   "animation.m1a1_smg_reload_norm": {
+      "subtitle": "animation.m1a1_smg_reload_norm",
+      "sounds": [
+         { "name": "tac:animation/m1a1_smg_reload_norm"}
+      ]
+   },
+   "animation.m1a1_smg_inspect": {
+      "subtitle": "animation.m1a1_smg_inspect",
+      "sounds": [
+         { "name": "tac:animation/m1a1_smg_inspect"}
+      ]
+   },
+   "animation.m1a1_smg_inspect_empty": {
+      "subtitle": "animation.m1a1_smg_inspect_empty",
+      "sounds": [
+         { "name": "tac:animation/m1a1_smg_inspect_empty"}
+      ]
+   },
+   "animation.m1a1_smg_reload_empty": {
+      "subtitle": "animation.m1a1_smg_reload_empty",
+      "sounds": [
+         { "name": "tac:animation/m1a1_smg_reload_empty"}
       ]
    },
 
