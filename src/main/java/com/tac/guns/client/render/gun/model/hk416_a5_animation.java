@@ -82,6 +82,7 @@ public class hk416_a5_animation implements IOverrideModel {
                     } else if (!Gun.hasAmmo(stack)) {
                         matrices.translate(0, 0, 0.205f * (-4.5 * Math.pow(0.5 - 0.5, 2) + 1.0));
                     }
+                    matrices.translate(0, 0, 0.025F);
                 }
             RenderUtil.renderModel(SpecialModels.HK416_A5_BOLT.getModel(), stack, matrices, renderBuffer, light, overlay);
             }
