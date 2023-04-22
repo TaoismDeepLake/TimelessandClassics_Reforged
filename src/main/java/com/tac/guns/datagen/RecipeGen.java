@@ -272,10 +272,10 @@ public class RecipeGen extends RecipeProvider
                 .build(consumer);
 
         //Ammo
-        /*WorkbenchRecipeBuilder.workbenchRecipe(ModItems.RPG7_MISSILE.get())
+        WorkbenchRecipeBuilder.workbenchRecipe(ModItems.RPG7_MISSILE.get())
                 .addIngredient(Tags.Items.INGOTS_IRON, 32)
                 .addIngredient(Tags.Items.GUNPOWDER, 8)
-                .build(consumer);*/
+                .build(consumer);
 
         WorkbenchRecipeBuilder.workbenchRecipe(ModItems.BULLET_10g.get(), 20)
                 .addIngredient(Tags.Items.INGOTS_IRON, 1)
