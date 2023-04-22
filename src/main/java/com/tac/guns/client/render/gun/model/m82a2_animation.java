@@ -47,6 +47,7 @@ public class m82a2_animation implements IOverrideModel {
             //matrices.push();
             if(transformType.isFirstPerson()) {
                 matrices.translate(0, 0, 0.375f * (-4.5 * Math.pow(cooldownOg - 0.5, 2) + 1.0));
+                matrices.translate(0, 0, 0.025F);
             }
             matrices.translate(0, 0, -1.5);
             RenderUtil.renderModel(SpecialModels.M82A2_BARREL.getModel(), stack, matrices, renderBuffer, light, overlay);
@@ -60,6 +61,7 @@ public class m82a2_animation implements IOverrideModel {
             controller.applySpecialModelTransform(SpecialModels.M82A2_BODY.getModel(), M82A2AnimationController.INDEX_BOLT, transformType, matrices);
             if (transformType.isFirstPerson()) {
                 matrices.translate(0, 0, 0.375f * (-4.5 * Math.pow(cooldownOg - 0.5, 2) + 1.0));
+                matrices.translate(0, 0, 0.025F);
             }
             RenderUtil.renderModel(SpecialModels.M82A2_BOLT.getModel(), stack, matrices, renderBuffer, light, overlay);
         }
