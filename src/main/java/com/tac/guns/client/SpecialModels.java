@@ -473,6 +473,7 @@ public enum SpecialModels
 
     MK23("mk23"),
     MK23_SLIDE("mk23_slide"),
+    MK23_BULLET("mk23_bullet"),
     MK23_SUPPRESSOR("mk23_suppressor"),
     MK23_EXTENDED_MAG("mk23_extended_mag"),
     MK23_STANDARD_MAG("mk23_standard_mag"),

@@ -480,13 +480,13 @@
       ]
    },
    "item.mk23_fire_s": {
-      "subtitle": "subtitle.tac.hkmk23_fire_s",
+      "subtitle": "subtitle.tac.mk23_fire_s",
       "sounds": [
          { "name": "tac:item/mk23_fire_s" }
       ]
    },
    "item.mk23_fire": {
-      "subtitle": "subtitle.tac.hkmk23_fire",
+      "subtitle": "subtitle.tac.mk23_fire",
       "sounds": [
          { "name": "tac:item/mk23_fire" }
       ]
@@ -2064,6 +2064,37 @@
       "subtitle": "animation.mp9_reload_empty",
       "sounds": [
          { "name": "tac:animation/mp9_reload_empty"}
+      ]
+   },
+
+   "animation.mk23_draw": {
+      "subtitle": "animation.mk23_draw",
+      "sounds": [
+         { "name": "tac:animation/mk23_draw"}
+      ]
+   },
+   "animation.mk23_reload_norm": {
+      "subtitle": "animation.mk23_reload_norm",
+      "sounds": [
+         { "name": "tac:animation/mk23_reload_norm"}
+      ]
+   },
+   "animation.mk23_inspect": {
+      "subtitle": "animation.mk23_inspect",
+      "sounds": [
+         { "name": "tac:animation/mk23_inspect"}
+      ]
+   },
+   "animation.mk23_inspect_empty": {
+      "subtitle": "animation.mk23_inspect_empty",
+      "sounds": [
+         { "name": "tac:animation/mk23_inspect_empty"}
+      ]
+   },
+   "animation.mk23_reload_empty": {
+      "subtitle": "animation.mk23_reload_empty",
+      "sounds": [
+         { "name": "tac:animation/mk23_reload_empty"}
       ]
    }
 }
