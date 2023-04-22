@@ -429,6 +429,8 @@ public enum SpecialModels
     SIG_MCX_SPEAR_TACTICAL_GRIP("sig_mcx_spear_tactical_grip"),
     MP9("mp9"),
     MP9_BOLT("mp9_bolt"),
+    MP9_BULLET("mp9_bullet"),
+    MP9_HANDLE("mp9_handle"),
 
     MP9_STOCK_FOLDED("mp9_stock_folded"),
     MP9_STOCK_EXTENDED("mp9_stock_ext"),
