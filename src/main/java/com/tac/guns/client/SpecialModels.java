@@ -75,6 +75,8 @@ public enum SpecialModels
     AK74("ak74"),
     M92FS("m92fs"),
     M92FS_SLIDE("m92fs_slide"),
+
+    M92FS_BULLET("m92fs_bullet"),
     M92FS_STANDARD_MAG("m92fs_standard_mag"),
     M92FS_EXTENDED_MAG("m92fs_extended_mag"),
     AR15_HELLMOUTH_BODY("ar_15_hellmouth_body"),

@@ -402,7 +402,7 @@
       ]
    },
    "item.m92fs_fire": {
-      "subtitle": "subtitle.tac.beretta92f_fire",
+      "subtitle": "subtitle.tac.m92fs_fire",
       "sounds": [
          { "name": "tac:item/m92fs_fire" }
       ]
@@ -2002,6 +2002,37 @@
       "subtitle": "animation.m249_reload_empty",
       "sounds": [
          { "name": "tac:animation/m249_reload_empty"}
+      ]
+   },
+
+   "animation.m92fs_draw": {
+      "subtitle": "animation.m92fs_draw",
+      "sounds": [
+         { "name": "tac:animation/m92fs_draw"}
+      ]
+   },
+   "animation.m92fs_reload_norm": {
+      "subtitle": "animation.m92fs_reload_norm",
+      "sounds": [
+         { "name": "tac:animation/m92fs_reload_norm"}
+      ]
+   },
+   "animation.m92fs_inspect": {
+      "subtitle": "animation.m92fs_inspect",
+      "sounds": [
+         { "name": "tac:animation/m92fs_inspect"}
+      ]
+   },
+   "animation.m92fs_inspect_empty": {
+      "subtitle": "animation.m92fs_inspect_empty",
+      "sounds": [
+         { "name": "tac:animation/m92fs_inspect_empty"}
+      ]
+   },
+   "animation.m92fs_reload_empty": {
+      "subtitle": "animation.m92fs_reload_empty",
+      "sounds": [
+         { "name": "tac:animation/m92fs_reload_empty"}
       ]
    }
 }

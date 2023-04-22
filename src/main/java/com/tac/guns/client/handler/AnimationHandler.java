@@ -84,6 +84,7 @@ public enum AnimationHandler {
         M1A1AnimationController.getInstance();
         Glock18AnimationController.getInstance();
         SIGMCXAnimationController.getInstance();
+        M92FSAnimationController.getInstance();
     }
 
     public void onGunReload(boolean reloading, ItemStack itemStack) {
