@@ -87,6 +87,7 @@ public enum AnimationHandler {
         M92FSAnimationController.getInstance();
         MP9AnimationController.getInstance();
         MK23AnimationController.getInstance();
+        RPG7AnimationController.getInstance();
     }
 
     public void onGunReload(boolean reloading, ItemStack itemStack) {

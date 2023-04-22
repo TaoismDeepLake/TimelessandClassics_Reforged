@@ -618,6 +618,26 @@ public class GunModifiers
             return speed*0.75;
         }
     };
+    public static final IGunModifier M79_MOD = new IGunModifier()
+    {
+        @Override
+        public double modifyAimDownSightSpeed(double speed) {
+            return speed*0.75;
+        }
+    };
+    public static final IGunModifier MGL_40MM_MOD = new IGunModifier()
+    {
+        @Override
+        public double modifyAimDownSightSpeed(double speed) { return speed*0.65;
+        }
+    };
+    public static final IGunModifier RPG7_MOD = new IGunModifier()
+    {
+        @Override
+        public double modifyAimDownSightSpeed(double speed) {
+            return speed*0.5;
+        }
+    };
     public static final IGunModifier QBZ_191_MOD = new IGunModifier()
     {
         @Override

@@ -75,13 +75,15 @@ public class type81_x_animation implements IOverrideModel {
                 boolean shouldOffset = reloadEmpty != null && reloadEmpty.equals(controller.getPreviousAnimation()) && controller.isAnimationRunning();
                 if (Gun.hasAmmo(stack) || shouldOffset) {
                     matrices.translate(0, 0, 0.280f * (-4.5 * Math.pow(cooldownOg - 0.5, 2) + 1.0));
+                    GunRenderingHandler.get().opticMovement = 0.280f * (-4.5 * Math.pow(cooldownOg - 0.5, 2) + 1.0);
                 } else if (!Gun.hasAmmo(stack)) {
                     {
                         matrices.translate(0, 0, 0.280f * (-4.5 * Math.pow(0.5 - 0.5, 2) + 1.0));
+                        GunRenderingHandler.get().opticMovement = 0.280f * (-4.5 * Math.pow(0.5 - 0.5, 2) + 1.0);
                     }
                 }
+                matrices.translate(0, 0, 0.025F);
             }
-            matrices.translate(0, 0, 0.025F);
             RenderUtil.renderModel(SpecialModels.TYPE81_X_BOLT.getModel(), stack, matrices, renderBuffer, light, overlay);
         }
 

@@ -1,25 +1,30 @@
 {
   "general": {
-    "rate": 30,
-    "rateSelector": [
-      0,
-      1
-    ],
+    "rate": 40,
+    "rateSelector": [1],
     "gripType": "tac:one_handed_m1911",
-    "recoilAngle": 1.15,
-    "recoilKick": 1.65,
-    "horizontalRecoilAngle": 0.0,
-    "recoilAdsReduction": 0.125,
-    "alwaysSpread": true,
-    "spread": 0.95,
-    "weightKilo": 7.7
+    "recoilAngle": 3.125,
+    "horizontalRecoilAngle": 1.65,
+    "recoilKick": 1.575,
+    "recoilAdsReduction": 0.25,
+    "weaponRecoilOffset": 0.8575,
+    "cameraRecoilModifier": 1.35,
+    "recoilDuration": 0.205,
+    "weightKilo": 7.7,
+
+    "spread": 0.545,
+    "firstShotSpread": 0.125,
+    "hipFireInaccuracy": 6.45,
+    "projToMinAccuracy": 6,
+    "msToAccuracyReset": 720,
+    "movementInaccuracy": 0.55
   },
   "reloads": {
-    "magFed": false,
+    "magFed": true,
     "maxAmmo": 1,
-    "reloadAmount": 1,
+    "reloadMagTimer": 74,
+    "additionalReloadEmptyMagTimer": 0,
     "preReloadPauseTicks": 0,
-    "interReloadPauseTicks": 120,
     "openBolt": true
   },
   "projectile": {
@@ -29,15 +34,20 @@
     "damage": 26,
     "size": 0.2,
     "speed": 6.375,
+    "trailLengthMultiplier": 0,
     "life": 60,
     "damageReduceOverLife": false,
     "ricochet": false
   },
   "sounds": {
-    "fire": "tac:item.rpg7",
-    "reload": "tac:item.pistol.reload",
-    "cock": "tac:item.pistol.cock",
-    "silencedFire": "tac:item.assault_rifle.silenced_fire"
+    "fire": "tac:item.rpg7_fire",
+    "reloadNormal": "tac:animation.rpg7_reload_norm",
+    "reloadEmpty": "tac:animation.rpg7_reload_empty",
+    "draw": "tac:animation.rpg7_draw",
+    "inspect": "tac:animation.rpg7_inspect",
+    "inspectEmpty": "tac:animation.rpg7_inspect_empty",
+    "cock":  "tac:item.pistol.cock",
+    "silencedFire":  "tac:item.rpg7_fire"
   },
   "display": {
     "flash": {

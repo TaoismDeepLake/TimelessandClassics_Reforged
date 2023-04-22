@@ -626,7 +626,7 @@
       ]
    },
    "item.rpg7_fire": {
-      "subtitle": "subtitle.tac.rpg7",
+      "subtitle": "subtitle.tac.rpg7_fire",
       "sounds": [
          { "name": "tac:item/rpg7_fire" }
       ]
@@ -2095,6 +2095,37 @@
       "subtitle": "animation.mk23_reload_empty",
       "sounds": [
          { "name": "tac:animation/mk23_reload_empty"}
+      ]
+   },
+
+   "animation.rpg7_draw": {
+      "subtitle": "animation.rpg7_draw",
+      "sounds": [
+         { "name": "tac:animation/rpg7_draw"}
+      ]
+   },
+   "animation.rpg7_reload_norm": {
+      "subtitle": "animation.rpg7_reload",
+      "sounds": [
+         { "name": "tac:animation/rpg7_reload"}
+      ]
+   },
+   "animation.rpg7_inspect": {
+      "subtitle": "animation.rpg7_inspect",
+      "sounds": [
+         { "name": "tac:animation/rpg7_inspect"}
+      ]
+   },
+   "animation.rpg7_inspect_empty": {
+      "subtitle": "animation.rpg7_inspect",
+      "sounds": [
+         { "name": "tac:animation/rpg7_inspect"}
+      ]
+   },
+   "animation.rpg7_reload_empty": {
+      "subtitle": "animation.rpg7_reload",
+      "sounds": [
+         { "name": "tac:animation/rpg7_reload"}
       ]
    }
 }

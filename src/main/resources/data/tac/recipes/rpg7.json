@@ -1,0 +1,26 @@
+{
+  "type": "tac:workbench",
+  "materials": [
+    {
+      "item": {
+        "tag": "forge:ingots/iron"
+      },
+      "count": 192
+    },
+    {
+      "item": {
+        "tag": "forge:ingots/gold"
+      },
+      "count": 96
+    },
+    {
+      "item": {
+        "tag": "forge:gems/diamond"
+      },
+      "count": 24
+    }
+  ],
+  "result": {
+    "item": "tac:rpg7"
+  }
+}

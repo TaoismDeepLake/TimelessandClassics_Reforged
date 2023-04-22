@@ -77,6 +77,7 @@ public class mk23_animation implements IOverrideModel
                 matrices.translate(0, 0, 0.225f * (-4.5 * Math.pow(0.5 - 0.5, 2) + 1.0));
                 GunRenderingHandler.get().opticMovement = 0.225f * (-4.5 * Math.pow(0.5 - 0.5, 2) + 1.0);
             }
+            matrices.translate(0, 0, 0.025F);
         }
         RenderUtil.renderModel(SpecialModels.MK23_SLIDE.getModel(), stack, matrices, renderBuffer, light, overlay);
         //Always pop

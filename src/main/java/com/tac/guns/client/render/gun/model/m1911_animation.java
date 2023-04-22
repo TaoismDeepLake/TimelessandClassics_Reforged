@@ -76,6 +76,7 @@ public class m1911_animation implements IOverrideModel {
                     matrices.translate(0, 0, 0.1925f * (-4.5 * Math.pow(0.5 - 0.5, 2) + 1.0));
                     GunRenderingHandler.get().opticMovement = 0.1925f * (-4.5 * Math.pow(0.5 - 0.5, 2) + 1.0);
                 }
+                matrices.translate(0, 0, 0.025F);
             }
             RenderUtil.renderModel(SpecialModels.M1911_SLIDE.getModel(), stack, matrices, renderBuffer, light, overlay);
         }
