@@ -5,16 +5,16 @@
       "item": {
         "tag": "forge:ingots/iron"
       },
-      "count": 50
+      "count": 30
     },
     {
       "item": {
         "tag": "forge:ingots/gold"
       },
-      "count": 3
+      "count": 6
     }
   ],
   "result": {
-    "item": "tac:sig_mcx_spear"
+    "item": "tac:mk23"
   }
 }
