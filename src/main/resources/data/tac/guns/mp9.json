@@ -1,41 +1,41 @@
 {
   "general": {
     "auto": true,
-    "rate": 900,
+    "rate": 950,
     "rateSelector": [2, 1],
     "gripType": "tac:two_handed_vector",
-    "recoilAngle": 1.5,
+    "recoilAngle": 1.75,
     "horizontalRecoilAngle": 1.45,
     "recoilKick": 1.755,
     "recoilAdsReduction": 0.25,
     "weaponRecoilOffset": 0.85,
     "cameraRecoilModifier": 1.2,
-    "recoilDuration": 0.1875,
+    "recoilDuration": 0.25,
     "weightKilo": 2.5,
 
-    "spread": 2.725,
+    "spread": 2.5,
     "firstShotSpread": 0.165,
-    "hipFireInaccuracy": 3.5,
+    "hipFireInaccuracy": 2.95,
     "projToMinAccuracy": 4,
     "msToAccuracyReset": 360,
     "movementInaccuracy": 0.2
   },
   "reloads": {
     "magFed": true,
-    "maxAmmo": 25,
+    "maxAmmo": 20,
     "reloadMagTimer": 32,
     "additionalReloadEmptyMagTimer": 10,
-    "maxAdditionalAmmoPerOC": [5, 10, 15],
+    "maxAdditionalAmmoPerOC": [5, 10, 20],
     "preReloadPauseTicks": 8
   },
   "projectile": {
     "item": "tac:9mm_round",
     "visible": false,
-    "damage": 7.45,
+    "damage": 5,
     "size": 0.05,
     "speed": 12.0,
     "life": 13,
-    "trailLengthMultiplier": 2.75,
+    "trailLengthMultiplier": 2,
     "ricochet": true
   },
   "sounds": {
@@ -52,7 +52,8 @@
     "flash": {
       "yOffset": 8.45,
       "zOffset": -8.125,
-      "size": 0.38
+      "size": 0.5,
+      "trailAdjust": 0.5
     },
     "hipfireScale": 0.60,
     "hipfireMoveScale": 0.675,
@@ -63,7 +64,7 @@
     "zoom": {
       "fovModifier": 0.8,
       "yOffset": 10.025,
-      "zOffset": 1.55
+      "zOffset": 0.5
     },
     "attachments": {
       "scope": {

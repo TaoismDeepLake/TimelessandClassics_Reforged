@@ -30,7 +30,7 @@
   "projectile": {
     "item": "tac:9mm_round",
     "visible": false,
-    "damage": 4.6,
+    "damage": 5.5,
     "size": 0.075,
     "speed": 10,
     "trailLengthMultiplier": 2.75,
@@ -70,7 +70,7 @@
       "pistolScope": {
         "yOffset": 10.25,
         "zOffset": 4.715,
-        "scale": 1.80,
+        "scale": 2,
         "doRenderMount": false,
         "doOnSlideMovement": true
       },
