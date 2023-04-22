@@ -198,7 +198,7 @@ public class GunItem extends Item implements IColored
     {
         Item item = stack.getItem();
         return item == ModItems.M1911.get() || item == ModItems.MICRO_UZI.get()
-                || item == ModItems.CZ75.get();
+                || item == ModItems.CZ75.get() || item == ModItems.MK23.get();
     }
 
     /*@Override

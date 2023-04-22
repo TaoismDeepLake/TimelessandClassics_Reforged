@@ -75,6 +75,8 @@ public enum SpecialModels
     AK74("ak74"),
     M92FS("m92fs"),
     M92FS_SLIDE("m92fs_slide"),
+
+    M92FS_BULLET("m92fs_bullet"),
     M92FS_STANDARD_MAG("m92fs_standard_mag"),
     M92FS_EXTENDED_MAG("m92fs_extended_mag"),
     AR15_HELLMOUTH_BODY("ar_15_hellmouth_body"),
@@ -427,6 +429,8 @@ public enum SpecialModels
     SIG_MCX_SPEAR_TACTICAL_GRIP("sig_mcx_spear_tactical_grip"),
     MP9("mp9"),
     MP9_BOLT("mp9_bolt"),
+    MP9_BULLET("mp9_bullet"),
+    MP9_HANDLE("mp9_handle"),
 
     MP9_STOCK_FOLDED("mp9_stock_folded"),
     MP9_STOCK_EXTENDED("mp9_stock_ext"),
@@ -469,6 +473,7 @@ public enum SpecialModels
 
     MK23("mk23"),
     MK23_SLIDE("mk23_slide"),
+    MK23_BULLET("mk23_bullet"),
     MK23_SUPPRESSOR("mk23_suppressor"),
     MK23_EXTENDED_MAG("mk23_extended_mag"),
     MK23_STANDARD_MAG("mk23_standard_mag"),

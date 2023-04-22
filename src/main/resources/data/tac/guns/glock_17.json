@@ -3,11 +3,11 @@
     "rate": 400,
     "rateSelector": [1],
     "gripType": "tac:one_handed_m1911",
-    "recoilAngle": 10.25,
+    "recoilAngle": 7.25,
     "horizontalRecoilAngle": 10.75,
     "recoilKick": 2.05,
     "recoilAdsReduction": 0.235,
-    "weaponRecoilOffset": 0.9525,
+    "weaponRecoilOffset": 0.725,
     "cameraRecoilModifier": 5.15,
     "recoilDuration": 0.285,
     "weightKilo": 0.9,
@@ -76,9 +76,9 @@
         "scale": 0.0
       },
       "pistolScope": {
-        "yOffset": 10.25,
+        "yOffset": 10.275,
         "zOffset": 4.715,
-        "scale": 1.80,
+        "scale": 2,
         "doRenderMount": false,
         "doOnSlideMovement": true
       }
