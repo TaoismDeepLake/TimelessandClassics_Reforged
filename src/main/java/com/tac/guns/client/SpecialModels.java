@@ -293,6 +293,7 @@ public enum SpecialModels
     KAR98_BOLT_EXTRA("kar98_bolt_fixed"),
     KAR98_BULLET("kar98_bullet"),
     HK416_A5_BODY("hk416_a5"),
+    HK416_A5_BULLET("hk416_a5_bullet"),
     HK416_A5_BRAKE("hk416_a5_brake"),
     HK416_A5_COMPENSATOR("hk416_a5_compensator"),
     HK416_A5_BOLT("hk416_a5_bolt"),
