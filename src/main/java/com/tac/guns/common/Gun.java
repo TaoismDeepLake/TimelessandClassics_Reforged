@@ -27,6 +27,7 @@ import org.apache.logging.log4j.core.config.plugins.validation.constraints.Requi
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import com.tac.guns.util.GunModifierHelper;
 
 
 public final class Gun implements INBTSerializable<CompoundNBT>
@@ -1480,6 +1481,9 @@ public final class Gun implements INBTSerializable<CompoundNBT>
             private ScaledPositioned sideRail;
             @Optional
             @Nullable
+            private ScaledPositioned extendedMag;
+            @Optional
+            @Nullable
             private ScaledPositioned oldScope;
             @Optional
             @Nullable
@@ -1515,6 +1519,12 @@ public final class Gun implements INBTSerializable<CompoundNBT>
             public ScaledPositioned getSideRail()
             {
                 return this.sideRail;
+            }
+
+            @Nullable
+            public ScaledPositioned getExtendedMag()
+            {
+                return this.extendedMag;
             }
             @Nullable
             public ScaledPositioned getOldScope()
@@ -1561,6 +1571,10 @@ public final class Gun implements INBTSerializable<CompoundNBT>
                 {
                     tag.put("SideRail", this.sideRail.serializeNBT());
                 }
+                if(this.extendedMag != null)
+                {
+                    tag.put("ExtendedMag", this.extendedMag.serializeNBT());
+                }
                 if(this.pistolScope != null)
                 {
                     tag.put("PistolScope", this.pistolScope.serializeNBT());
@@ -1599,6 +1613,10 @@ public final class Gun implements INBTSerializable<CompoundNBT>
                 {
                     this.sideRail = this.createScaledPositioned(tag, "SideRail");
                 }
+                if(tag.contains("ExtendedMag", Constants.NBT.TAG_COMPOUND))
+                {
+                    this.extendedMag = this.createScaledPositioned(tag, "ExtendedMag");
+                }
                 if(tag.contains("PistolScope", Constants.NBT.TAG_COMPOUND))
                 {
                     this.pistolScope = this.createPistolScope(tag, "PistolScope");
@@ -1635,6 +1653,10 @@ public final class Gun implements INBTSerializable<CompoundNBT>
                 if(this.sideRail != null)
                 {
                     attachments.sideRail = this.sideRail.copy();
+                }
+                if(this.extendedMag != null)
+                {
+                    attachments.extendedMag = this.extendedMag.copy();
                 }
                 if(this.pistolScope != null)
                 {
@@ -1995,6 +2017,8 @@ public final class Gun implements INBTSerializable<CompoundNBT>
                     return this.modules.attachments.underBarrel != null;
                 case SIDE_RAIL:
                     return this.modules.attachments.sideRail != null;
+                case EXTENDED_MAG:
+                    return this.modules.attachments.extendedMag != null;
                 case OLD_SCOPE:
                     return this.modules.attachments.oldScope != null;
                 case PISTOL_SCOPE:
@@ -2023,6 +2047,8 @@ public final class Gun implements INBTSerializable<CompoundNBT>
                     return this.modules.attachments.underBarrel;
                 case SIDE_RAIL:
                     return this.modules.attachments.sideRail;
+                case EXTENDED_MAG:
+                    return this.modules.attachments.extendedMag;
                 case OLD_SCOPE:
                     return this.modules.attachments.oldScope;
                 case PISTOL_SCOPE:

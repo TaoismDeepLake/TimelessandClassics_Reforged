@@ -19,6 +19,7 @@ import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
+import com.tac.guns.util.GunModifierHelper;
 
 /*
  * Because the revolver has a rotating chamber, we need to render it in a
@@ -86,7 +87,7 @@ public class qbz_191_animation implements IOverrideModel {
         matrices.push();
         {
             controller.applySpecialModelTransform(SpecialModels.QBZ_191_BODY.getModel(), Type191AnimationController.INDEX_MAG, transformType, matrices);
-            if(EnchantmentHelper.getEnchantmentLevel(ModEnchantments.OVER_CAPACITY.get(), stack) > 0) {
+            if(GunModifierHelper.getAmmoCapacity(stack) > -1) {
                 RenderUtil.renderModel(SpecialModels.QBZ_191_EXTENDED_MAG.getModel(), stack, matrices, renderBuffer, light, overlay);
             } else {
                 RenderUtil.renderModel(SpecialModels.QBZ_191_STANDARD_MAG.getModel(), stack, matrices, renderBuffer, light, overlay);
@@ -98,7 +99,7 @@ public class qbz_191_animation implements IOverrideModel {
             matrices.push();
             {
                 controller.applySpecialModelTransform(SpecialModels.QBZ_191_BODY.getModel(), Type191AnimationController.INDEX_EXTRA_MAG, transformType, matrices);
-                if(EnchantmentHelper.getEnchantmentLevel(ModEnchantments.OVER_CAPACITY.get(), stack) > 0)
+                if(GunModifierHelper.getAmmoCapacity(stack) > -1)
                 {
                     RenderUtil.renderModel(SpecialModels.QBZ_191_EXTENDED_MAG.getModel(), stack, matrices, renderBuffer, light, overlay);
                 }

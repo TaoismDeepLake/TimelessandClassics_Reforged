@@ -1,5 +1,6 @@
 package com.tac.guns.client.render.gun.model;
 
+import com.tac.guns.util.GunModifierHelper;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.tac.guns.Config;
 import com.tac.guns.client.SpecialModels;
