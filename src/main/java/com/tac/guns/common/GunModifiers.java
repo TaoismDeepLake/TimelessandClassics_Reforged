@@ -382,7 +382,7 @@ public class GunModifiers
             return speed * 0.95F;
         }
         @Override
-        public float modifyWeaponWeight() { return 0.125F; }
+        public float modifyWeaponWeight() { return 0.08F; }
 
         @Override
         public int additionalAmmunition() {
@@ -394,10 +394,10 @@ public class GunModifiers
         @Override
         public double modifyAimDownSightSpeed(double speed)
         {
-            return speed * 0.85F;
+            return speed * 0.91F;
         }
         @Override
-        public float modifyWeaponWeight() { return 0.175F; }
+        public float modifyWeaponWeight() { return 0.13F; }
 
         @Override
         public int additionalAmmunition() {
@@ -409,10 +409,10 @@ public class GunModifiers
         @Override
         public double modifyAimDownSightSpeed(double speed)
         {
-            return speed * 0.75F;
+            return speed * 0.87F;
         }
         @Override
-        public float modifyWeaponWeight() { return 0.25F; }
+        public float modifyWeaponWeight() { return 0.2F; }
 
         @Override
         public int additionalAmmunition() {
