@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#I#",
+    "IXI",
+    "#I#"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:materials/legendary"
+    },
+    "I": {
+      "item": "minecraft:diamond"
+    },
+    "X": {
+      "item": "minecraft:nether_star"
+    }
+  },
+  "result": {
+    "item": "tac:ultimate_material"
+  }
+}

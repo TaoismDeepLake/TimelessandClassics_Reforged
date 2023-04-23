@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "tac:rare_material"
+    }
+  ],
+  "result": {
+    "item": "tac:uncommon_material",
+    "count": 4
+  }
+}

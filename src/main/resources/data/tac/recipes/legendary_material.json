@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "tac:ultimate_material"
+    }
+  ],
+  "result": {
+    "item": "tac:legendary_material",
+    "count": 4
+  }
+}

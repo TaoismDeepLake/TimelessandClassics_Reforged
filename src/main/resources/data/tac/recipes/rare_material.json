@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "tac:epic_material"
+    }
+  ],
+  "result": {
+    "item": "tac:rare_material",
+    "count": 4
+  }
+}

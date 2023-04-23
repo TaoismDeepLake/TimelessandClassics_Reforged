@@ -211,4 +211,12 @@ public class ModItems
 
     public static final RegistryObject<Item> MODULE = REGISTER.register("module_item",
             () -> new Item(new Item.Properties().maxStackSize(64).group(GunMod.GROUP)));
+
+    public static final RegistryObject<Item> UNCOMMON_MATERIAL = REGISTER.register("uncommon_material", () -> new Item(new Item.Properties().maxStackSize(64).group(GunMod.GROUP)));
+    public static final RegistryObject<Item> RARE_MATERIAL = REGISTER.register("rare_material", () -> new Item(new Item.Properties().maxStackSize(48).group(GunMod.GROUP)));
+    public static final RegistryObject<Item> EPIC_MATERIAL = REGISTER.register("epic_material", () -> new Item(new Item.Properties().maxStackSize(32).group(GunMod.GROUP)));
+    public static final RegistryObject<Item> LEGENDARY_MATERIAL = REGISTER.register("legendary_material", () -> new Item(new Item.Properties().maxStackSize(24).group(GunMod.GROUP)));
+    public static final RegistryObject<Item> ULTIMATE_MATERIAL = REGISTER.register("ultimate_material", () -> new Item(new Item.Properties().maxStackSize(16).group(GunMod.GROUP)));
+    //public static final RegistryObject<Item> LEGENDARY_CERTIFICATE = REGISTER.register("legendary_certificate",() -> new Item(new Item.Properties().maxStackSize(32).group(GunMod.GROUP)));
+    //public static final RegistryObject<Item> ULTIMATE_CERTIFICATE = REGISTER.register("ultimate_certificate",() -> new Item(new Item.Properties().maxStackSize(16).group(GunMod.GROUP)));
 }

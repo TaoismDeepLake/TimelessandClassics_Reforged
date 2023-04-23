@@ -70,7 +70,7 @@ public class m1014_animation implements IOverrideModel {
         matrices.push();
         {
             controller.applySpecialModelTransform(SpecialModels.M1014.getModel(), M1014AnimationController.INDEX_BULLET, transformType, matrices);
-            if(Gun.hasAmmo(stack) || controller.isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_LOOP))
+            if(controller.isAnimationRunning(GunAnimationController.AnimationLabel.INSPECT) || controller.isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_LOOP))
                 RenderUtil.renderModel(SpecialModels.M1014_BULLET.getModel(), stack, matrices, renderBuffer, light, overlay);
         }
         matrices.pop();
