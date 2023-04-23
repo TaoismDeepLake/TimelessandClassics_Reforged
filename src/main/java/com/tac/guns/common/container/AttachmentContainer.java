@@ -107,7 +107,7 @@ public class AttachmentContainer extends Container
                 else
                     attachments[i] = Gun.getAttachment(IAttachment.Type.values()[i], stack);
             }
-            for (int i = 0; i < attachments.length-6; i++)
+            for (int i = 0; i < attachments.length-5; i++)
             {
                 if(i==0)
                     this.weaponInventory.setInventorySlotContents(0, attachments[0]);
@@ -160,17 +160,17 @@ public class AttachmentContainer extends Container
                 int itorationAdjustment = i;
                 if(i==9)
                 {
-                    itorationAdjustment = i-6;
+                    itorationAdjustment = i-7;
                     this.addSlot(new AttachmentSlot(this, this.weaponInventory, this.weapon, IAttachment.Type.values()[i], playerInventory.player, i, 70, 32 + (itorationAdjustment) * 18));
                 }
                 if(i==10)
                 {
-                    itorationAdjustment = i-8;
+                    itorationAdjustment = i-9;
                     this.addSlot(new AttachmentSlot(this, this.weaponInventory, this.weapon, IAttachment.Type.values()[i], playerInventory.player, i, 40, -1 + (itorationAdjustment) * 18));
                 }
                 if(i==11)
                 {
-                    itorationAdjustment = i-9;
+                    itorationAdjustment = i-10;
                     this.addSlot(new AttachmentSlot(this, this.weaponInventory, this.weapon, IAttachment.Type.values()[i], playerInventory.player, i, 10, 50 + (itorationAdjustment) * 18));
                 }
             }
