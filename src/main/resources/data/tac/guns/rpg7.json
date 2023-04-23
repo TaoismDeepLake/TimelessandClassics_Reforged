@@ -1,6 +1,6 @@
 {
   "general": {
-    "rate": 40,
+    "rate": 30,
     "rateSelector": [1],
     "gripType": "tac:one_handed_m1911",
     "recoilAngle": 3.125,
@@ -29,8 +29,8 @@
   },
   "projectile": {
     "item": "tac:rpg7_missile",
-    "visible": false,
-    "gravity": true,
+    "visible": true,
+    "gravity": false,
     "damage": 26,
     "size": 0.2,
     "speed": 6.375,

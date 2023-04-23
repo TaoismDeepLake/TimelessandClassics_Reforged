@@ -71,7 +71,7 @@ public class ModItems
     public static final RegistryObject<Item> MP7 = REGISTER.register("mp7", () -> new TimelessGunItem(properties -> properties.group(GunMod.SMG), GunModifiers.MP7_MOD));
     public static final RegistryObject<Item> M82A2 = REGISTER.register("m82a2", () -> new TimelessGunItem(properties -> properties.group(GunMod.SNIPER), GunModifiers.M82A2_MOD));
     public static final RegistryObject<Item> AI_AWP = REGISTER.register("ai_awp", () -> new TimelessGunItem(properties -> properties.group(GunMod.SNIPER), GunModifiers.AIAWP_MOD));
-    public static final RegistryObject<GunItem> RPG7 = REGISTER.register("rpg7", () -> new TimelessGunItem(properties -> properties.group(GunMod.EXPLOSIVES), GunModifiers.RPG7_MOD));
+    public static final RegistryObject<GunItem> RPG7 = REGISTER.register("rpg7", () -> new TimelessGunItem(properties -> properties.group(GunMod.HEAVY_MATERIAL), GunModifiers.RPG7_MOD));
     //public static final RegistryObject<Item> TEC_9 = REGISTER.register("tec_9", () -> new TimelessPistolGunItem(properties -> properties.group(GunMod.PISTOL)));
     public static final RegistryObject<Item> RPK = REGISTER.register("rpk", () -> new TimelessGunItem(properties -> properties.group(GunMod.HEAVY_MATERIAL)));
     public static final RegistryObject<Item> FN_FAL = REGISTER.register("fn_fal", () -> new TimelessGunItem(properties -> properties.group(GunMod.RIFLE)));
@@ -124,7 +124,7 @@ public class ModItems
     public static final RegistryObject<Item> BULLET_68 = REGISTER.register("bullet68", TimelessAmmoItem::new);
 
     /* Explosives */
-    public static final RegistryObject<Item> RPG7_MISSILE = REGISTER.register("rpg7_missile", () -> new AmmoItem(new Item.Properties().maxStackSize(3).group(GunMod.EXPLOSIVES)));
+    public static final RegistryObject<Item> RPG7_MISSILE = REGISTER.register("rpg7_missile", () -> new AmmoItem(new Item.Properties().maxStackSize(6).group(GunMod.AMMO)));
 
     public static final RegistryObject<Item> LIGHT_GRENADE = REGISTER.register("light_grenade", () ->  new LightGrenadeItem(new Item.Properties().maxStackSize(8).group(GunMod.EXPLOSIVES), 25 * 4, 0.95f, 1.35f));
     public static final RegistryObject<Item> BASEBALL_GRENADE = REGISTER.register("baseball_grenade", () ->  new BaseballGrenadeItem(new Item.Properties().maxStackSize(4).group(GunMod.EXPLOSIVES), 20 * 7, 1.425f, 1.135f));
