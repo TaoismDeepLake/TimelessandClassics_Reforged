@@ -36,12 +36,12 @@ public class RigEnchantmentHelper
     public static int getRate(ItemStack weapon, Gun modifiedGun)
     {
         int rate = modifiedGun.getGeneral().getRate();
-        int level = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.TRIGGER_FINGER.get(), weapon);
-        if(level > 0)
-        {
-            float newRate = rate * (0.25F * level);
-            rate -= MathHelper.clamp(newRate, 0, rate);
-        }
+//        int level = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.TRIGGER_FINGER.get(), weapon);
+//        if(level > 0)
+//        {
+//            float newRate = rate * (0.25F * level);
+//            rate -= MathHelper.clamp(newRate, 0, rate);
+//        }
         return rate;
     }
 

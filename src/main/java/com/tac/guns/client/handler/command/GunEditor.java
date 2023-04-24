@@ -358,10 +358,18 @@ public class GunEditor
     }
 
     public float getDamageMod() {return this.damageMod;}
+    public float getArmorIgnoreMod() {return this.armorIgnoreMod;}
+    public float getCriticalMod() {return this.criticalMod;}
+    public float getCriticalDamageMod() {return this.criticalDamageMod;}
+    public float getHeadDamageMod() {return this.headDamageMod;}
     public float getSizePrjMod() {return this.sizePrjMod;}
     public double getSpeedMod() {return this.speedMod;}
     public double getLifeMod() {return this.lifeMod;}
     private float damageMod = 0;
+    private float armorIgnoreMod = 0;
+    private float criticalMod = 0;
+    private float criticalDamageMod = 0;
+    private float headDamageMod = 0;
     private float sizePrjMod = 0;
     private double speedMod = 0;
     private double lifeMod = 0;
@@ -434,10 +442,18 @@ public class GunEditor
 
         CompoundNBT gun = getMapItem(gunItem.getTranslationKey(), gunItem.getGun()).serializeNBT(); // Copy to ensure we are grabbing a copy of this data. new CompoundNBT();//
         gun.getCompound("Projectile").remove("Damage");
+        gun.getCompound("Projectile").remove("ArmorIgnore");
+        gun.getCompound("Projectile").remove("Critical");
+        gun.getCompound("Projectile").remove("CriticalDamage");
+        gun.getCompound("Projectile").remove("HeadDamage");
         gun.getCompound("Projectile").remove("Size");
         gun.getCompound("Projectile").remove("Speed");
         gun.getCompound("Projectile").remove("Life");
         gun.getCompound("Projectile").putDouble("Damage", gunItem.getGun().getProjectile().getDamage());
+        gun.getCompound("Projectile").putDouble("ArmorIgnore", gunItem.getGun().getProjectile().getGunArmorIgnore());
+        gun.getCompound("Projectile").putDouble("Critical", gunItem.getGun().getProjectile().getGunCritical());
+        gun.getCompound("Projectile").putDouble("CriticalDamage", gunItem.getGun().getProjectile().getGunCriticalDamage());
+        gun.getCompound("Projectile").putDouble("HeadDamage", gunItem.getGun().getProjectile().getGunHeadDamage());
         gun.getCompound("Projectile").putDouble("Size", gunItem.getGun().getProjectile().getSize());
         gun.getCompound("Projectile").putDouble("Speed", gunItem.getGun().getProjectile().getSpeed());
         gun.getCompound("Projectile").putDouble("Life", gunItem.getGun().getProjectile().getLife());
@@ -790,6 +806,10 @@ public class GunEditor
 
             case projectile:
                 this.damageMod = 0;
+                this.armorIgnoreMod = 0;
+                this.criticalMod = 0;
+                this.criticalDamageMod = 0;
+                this.headDamageMod = 0;
                 this.sizePrjMod = 0;
                 this.speedMod = 0;
                 this.lifeMod = 0;
