@@ -191,12 +191,24 @@
             { "name": "tac:item/hk416_fire" }
          ]
       },
-      "item.hk416_fire_s": {
+   "item.hk416_fire_s": {
          "subtitle": "subtitle.tac.hk416_fire",
          "sounds": [
             { "name": "tac:item/hk416_fire_s" }
          ]
       },
+   "item.hkmk23_fire": {
+      "subtitle": "subtitle.tac.hkmk23_fire",
+      "sounds": [
+         { "name": "tac:item/hkmk23_fire" }
+      ]
+   },
+   "item.hkmk23_fire_s": {
+      "subtitle": "subtitle.tac.hkmk23_fire",
+      "sounds": [
+         { "name": "tac:item/hkmk23_fire_s" }
+      ]
+   },
    "item.sigmcx_fire": {
       "subtitle": "subtitle.tac.sigmcx_fire",
       "sounds": [
