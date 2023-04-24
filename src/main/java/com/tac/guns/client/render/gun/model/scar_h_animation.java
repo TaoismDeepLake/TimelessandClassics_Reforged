@@ -32,7 +32,7 @@ import com.tac.guns.util.GunModifierHelper;
 public class scar_h_animation implements IOverrideModel {
 
     @Override
-    public void render(float v, ItemCameraTransforms.TransformType transformType, ItemStack stack, ItemStack parent, LivingEntity entity, MatrixStack matrices, IRenderTypeBuffer renderBuffer, int light, int overlay)
+    public void render(float partialTicks, ItemCameraTransforms.TransformType transformType, ItemStack stack, ItemStack parent, LivingEntity entity, MatrixStack matrices, IRenderTypeBuffer renderBuffer, int light, int overlay)
     {
         SCAR_HAnimationController controller = SCAR_HAnimationController.getInstance();
         matrices.push();
@@ -81,7 +81,7 @@ public class scar_h_animation implements IOverrideModel {
 
         matrices.push();
         {
-            if(transformType.isFirstPerson() && controller.isAnimationRunning(GunAnimationController.AnimationLabel.RELOAD_EMPTY)) {
+            if(transformType.isFirstPerson()) {
                 controller.applySpecialModelTransform(SpecialModels.SCAR_H_BODY.getModel(), SCAR_HAnimationController.INDEX_MAGAZINE2, transformType, matrices);
                 if (GunModifierHelper.getAmmoCapacity(stack) > -1) {
                     RenderUtil.renderModel(SpecialModels.SCAR_H_EXTENDED_MAG.getModel(), stack, matrices, renderBuffer, light, overlay);
