@@ -751,7 +751,6 @@ public class ProjectileEntity extends Entity implements IEntityAdditionalSpawnDa
     private float getCriticalDamage(ItemStack weapon, Random rand, float damage)
     {
         float chance = GunModifierHelper.getCriticalChance(weapon) + this.projectile.getGunCritical();
-        if (chance > 1) chance = 1f;
         if (rand.nextFloat() < chance)
         {
             return (float) (damage * Config.COMMON.gameplay.criticalDamageMultiplier.get() * this.projectile.getGunCriticalDamage());
