@@ -391,10 +391,26 @@ public class GunEditor
             if (isUp) {
                 this.damageMod += 0.025f * stepModifier;
                 player.sendStatusMessage(new TranslationTextComponent("Damage: "+gunTmp.getProjectile().getDamage()).mergeStyle(TextFormatting.GREEN), true);
+                this.criticalMod += 0.025f * stepModifier;
+                player.sendStatusMessage(new TranslationTextComponent("Damage: "+gunTmp.getProjectile().getGunCritical()).mergeStyle(TextFormatting.GREEN), true);
+                this.armorIgnoreMod += 0.025f * stepModifier;
+                player.sendStatusMessage(new TranslationTextComponent("Damage: "+gunTmp.getProjectile().getGunArmorIgnore()).mergeStyle(TextFormatting.GREEN), true);
+                this.criticalDamageMod += 0.025f * stepModifier;
+                player.sendStatusMessage(new TranslationTextComponent("Damage: "+gunTmp.getProjectile().getGunCriticalDamage()).mergeStyle(TextFormatting.GREEN), true);
+                this.headDamageMod += 0.025f * stepModifier;
+                player.sendStatusMessage(new TranslationTextComponent("Damage: "+gunTmp.getProjectile().getGunHeadDamage()).mergeStyle(TextFormatting.GREEN), true);
             }
             else if (isDown) {
                 this.damageMod -= 0.025f * stepModifier;
                 player.sendStatusMessage(new TranslationTextComponent("Damage: "+gunTmp.getProjectile().getDamage()).mergeStyle(TextFormatting.DARK_RED), true);
+                this.criticalMod -= 0.025f * stepModifier;
+                player.sendStatusMessage(new TranslationTextComponent("Damage: "+gunTmp.getProjectile().getGunCritical()).mergeStyle(TextFormatting.DARK_RED), true);
+                this.armorIgnoreMod -= 0.025f * stepModifier;
+                player.sendStatusMessage(new TranslationTextComponent("Damage: "+gunTmp.getProjectile().getGunArmorIgnore()).mergeStyle(TextFormatting.DARK_RED), true);
+                this.criticalDamageMod -= 0.025f * stepModifier;
+                player.sendStatusMessage(new TranslationTextComponent("Damage: "+gunTmp.getProjectile().getGunCriticalDamage()).mergeStyle(TextFormatting.DARK_RED), true);
+                this.headDamageMod -= 0.025f * stepModifier;
+                player.sendStatusMessage(new TranslationTextComponent("Damage: "+gunTmp.getProjectile().getGunHeadDamage()).mergeStyle(TextFormatting.DARK_RED), true);
             }
         }
         else if(InputHandler.L.down)

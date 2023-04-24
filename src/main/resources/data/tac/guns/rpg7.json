@@ -3,18 +3,18 @@
     "rate": 30,
     "rateSelector": [1],
     "gripType": "tac:one_handed_m1911",
-    "recoilAngle": 3.125,
-    "horizontalRecoilAngle": 1.65,
-    "recoilKick": 1.575,
+    "recoilAngle": 3.25,
+    "horizontalRecoilAngle": 3.25,
+    "recoilKick": 1.5,
     "recoilAdsReduction": 0.25,
-    "weaponRecoilOffset": 0.8575,
+    "weaponRecoilOffset": 0.5,
     "cameraRecoilModifier": 1.35,
-    "recoilDuration": 0.205,
-    "weightKilo": 7.7,
+    "recoilDuration": 0.35,
+    "weightKilo": 10.3,
 
-    "spread": 0.545,
+    "spread": 2.0,
     "firstShotSpread": 0.125,
-    "hipFireInaccuracy": 6.45,
+    "hipFireInaccuracy": 4.0,
     "projToMinAccuracy": 6,
     "msToAccuracyReset": 720,
     "movementInaccuracy": 0.55
@@ -31,11 +31,11 @@
     "item": "tac:rpg7_missile",
     "visible": true,
     "gravity": false,
-    "damage": 26,
-    "size": 0.2,
-    "speed": 6.375,
+    "damage": 100,
+    "size": 1,
+    "speed": 4,
     "trailLengthMultiplier": 0,
-    "life": 60,
+    "life": 25,
     "damageReduceOverLife": false,
     "ricochet": false
   },
@@ -59,10 +59,10 @@
   },
   "modules": {
     "zoom":{
-      "fovModifier": 0.6,
+      "fovModifier": 0.5,
       "xOffset": 0.885,
-      "yOffset": 8.41,
-      "zOffset": 0.35
+      "yOffset": 8.375,
+      "zOffset": 3
     },
     "attachments": { }
   }
