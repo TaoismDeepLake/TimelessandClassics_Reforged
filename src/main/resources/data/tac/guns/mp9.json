@@ -1,7 +1,7 @@
 {
   "general": {
     "auto": true,
-    "rate": 950,
+    "rate": 780,
     "rateSelector": [2, 1],
     "gripType": "tac:two_handed_vector",
     "recoilAngle": 1.75,
@@ -31,7 +31,7 @@
   "projectile": {
     "item": "tac:9mm_round",
     "visible": false,
-    "damage": 5,
+    "damage": 6.5,
     "armorIgnore": 0.7,
     "critical": 0.0,
     "criticalDamage": 0.625,
@@ -75,6 +75,13 @@
         "yOffset": 9.325,
         "zOffset": 1.25,
         "scale": 1.00
+      },
+      "pistolScope": {
+        "yOffset": 9.375,
+        "zOffset": 2,
+        "scale": 1.0,
+        "doRenderMount": true,
+        "doOnSlideMovement": false
       },
       "extendedMag": {
         "yOffset": 1000.89,
