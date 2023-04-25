@@ -709,17 +709,24 @@
          { "name": "tac:item/rpk_fire" }
       ]
    },
-   
-
-
-
    "item.m79_fire": {
       "subtitle": "subtitle.tac.m203",
       "sounds": [
          { "name": "tac:item/m79_fire" }
       ]
    },
- 
+   "item.udp_9_fire_s": {
+      "subtitle": "subtitle.tac.udp_9_fire_s",
+      "sounds": [
+         { "name": "tac:item/udp_9_fire_s" }
+      ]
+   },
+   "item.udp_9_fire": {
+      "subtitle": "subtitle.tac.udp_9_fire",
+      "sounds": [
+         { "name": "tac:item/udp_9_fire" }
+      ]
+   },
 
    
 
@@ -2138,6 +2145,37 @@
       "subtitle": "animation.rpg7_reload",
       "sounds": [
          { "name": "tac:animation/rpg7_reload"}
+      ]
+   },
+
+   "animation.udp_9_draw": {
+      "subtitle": "animation.udp_9_draw",
+      "sounds": [
+         { "name": "tac:animation/udp_9_draw"}
+      ]
+   },
+   "animation.udp_9_reload_norm": {
+      "subtitle": "animation.udp_9_reload_norm",
+      "sounds": [
+         { "name": "tac:animation/udp_9_reload_norm"}
+      ]
+   },
+   "animation.udp_9_inspect": {
+      "subtitle": "animation.udp_9_inspect",
+      "sounds": [
+         { "name": "tac:animation/udp_9_inspect"}
+      ]
+   },
+   "animation.udp_9_inspect_empty": {
+      "subtitle": "animation.udp_9_inspect_empty",
+      "sounds": [
+         { "name": "tac:animation/udp_9_inspect_empty"}
+      ]
+   },
+   "animation.udp_9_reload_empty": {
+      "subtitle": "animation.udp_9_reload_empty",
+      "sounds": [
+         { "name": "tac:animation/udp_9_reload_empty"}
       ]
    }
 }

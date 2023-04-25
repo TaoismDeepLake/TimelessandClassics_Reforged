@@ -628,6 +628,12 @@ public class GunModifiers
     {
         @Override
         public double modifyAimDownSightSpeed(double speed) {return speed*1.125;}
+
+        @Override
+        public float modifyFireSoundVolume(float volume)
+        {
+            return volume * 0.90F;
+        }
     };
     public static final IGunModifier SKS_MOD = new IGunModifier()
     {
