@@ -624,6 +624,11 @@ public class GunModifiers
         @Override
         public double modifyAimDownSightSpeed(double speed) {return speed*1.125;}
     };
+    public static final IGunModifier UDP_9_MOD = new IGunModifier()
+    {
+        @Override
+        public double modifyAimDownSightSpeed(double speed) {return speed*1.125;}
+    };
     public static final IGunModifier SKS_MOD = new IGunModifier()
     {
         @Override
