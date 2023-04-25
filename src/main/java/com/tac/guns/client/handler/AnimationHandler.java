@@ -138,7 +138,9 @@ public enum AnimationHandler {
                 if(runner == null) return;
                 float current = runner.getAnimationManager().getCurrentTimeS();
                 float max = runner.getAnimationManager().getMaxEndTimeS();
-                if(max - current <= 0.25f) return;
+                if(!(meta.equals(controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.PUMP)) ||
+                        meta.equals(controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.PULL_BOLT))))
+                    if(max - current <= 0.25f) return;
                 event.setCanceled(true);
             }
         }

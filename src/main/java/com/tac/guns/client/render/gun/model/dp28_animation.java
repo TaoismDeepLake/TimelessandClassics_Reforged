@@ -5,6 +5,7 @@ import com.tac.guns.Config;
 import com.tac.guns.client.SpecialModels;
 import com.tac.guns.client.handler.ShootingHandler;
 import com.tac.guns.client.render.animation.Dp28AnimationController;
+import com.tac.guns.client.render.animation.module.GunAnimationController;
 import com.tac.guns.client.render.animation.module.PlayerHandAnimation;
 import com.tac.guns.client.render.gun.IOverrideModel;
 import com.tac.guns.client.render.gun.ModelOverrides;
@@ -43,7 +44,7 @@ public class dp28_animation implements IOverrideModel {
                 //We're getting the cooldown tracker for the item - items like the sword, ender pearl, and chorus fruit all have this too.
                 Gun gun = ((GunItem) stack.getItem()).getGun();
                 float cooldownOg = ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1 : ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
-
+                if(controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.DRAW).equals(controller.getPreviousAnimation())) cooldownOg = 1;
                 if (Gun.hasAmmo(stack)) {
                     // Math provided by Bomb787 on GitHub and Curseforge!!!
                     matrices.translate(0, 0, 0.198f * (-4.5 * Math.pow(cooldownOg - 0.5, 2) + 1.0));

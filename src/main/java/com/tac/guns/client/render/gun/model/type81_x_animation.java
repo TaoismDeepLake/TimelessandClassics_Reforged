@@ -40,7 +40,7 @@ public class type81_x_animation implements IOverrideModel {
         Type81AnimationController controller = Type81AnimationController.getInstance();
         Gun gun = ((GunItem) stack.getItem()).getGun();
         float cooldownOg = ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1 : ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
-        
+        if(controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.DRAW).equals(controller.getPreviousAnimation())) cooldownOg = 1;
         matrices.push();
         {
             controller.applySpecialModelTransform(SpecialModels.TYPE81_X.getModel(),Type81AnimationController.INDEX_BODY,transformType,matrices);
@@ -87,32 +87,9 @@ public class type81_x_animation implements IOverrideModel {
             }
             RenderUtil.renderModel(SpecialModels.TYPE81_X_BOLT.getModel(), stack, matrices, renderBuffer, light, overlay);
         }
-
-        /*
-        Gun gun = ((GunItem) stack.getItem()).getGun();
-            float cooldownOg = ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1 : ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
-
-            AnimationMeta reloadEmpty = controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_EMPTY);
-            boolean shouldOffset = reloadEmpty != null && reloadEmpty.equals(controller.getPreviousAnimation()) && controller.isAnimationRunning();
-            if (Gun.hasAmmo(stack) || shouldOffset) {
-                matrices.translate(0, 0, 0.185f * (-4.5 * Math.pow(cooldownOg - 0.5, 2) + 1.0));
-                GunRenderingHandler.get().opticMovement = 0.185f * (-4.5 * Math.pow(cooldownOg - 0.5, 2) + 1.0);
-            } else if (!Gun.hasAmmo(stack)) {
-                matrices.translate(0, 0, 0.185f * (-4.5 * Math.pow(0.5 - 0.5, 2) + 1.0));
-                GunRenderingHandler.get().opticMovement = 0.185f * (-4.5 * Math.pow(0.5 - 0.5, 2) + 1.0);
-            }
-        * */
-        //Always pop
         matrices.pop();
 
         PlayerHandAnimation.render(controller,transformType,matrices,renderBuffer,light);
-/*
-        matrices.push();
-        {
-            controller.applySpecialModelTransform(SpecialModels.AK47.getModel(), Ak47AnimationController.INDEX_MAGAZINE, transformType, matrices);
-            RenderUtil.renderModel(SpecialModels.AK47_MAGAZINE.getModel(), stack, matrices, renderBuffer, light, overlay);
-        }
-        matrices.pop();*/
     }
 
      

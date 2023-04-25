@@ -27,12 +27,6 @@ import com.tac.guns.util.GunModifierHelper;
  * Author: ClumsyAlien, codebase and design based off Mr.Pineapple's original addon
  */
 public class m1014_animation implements IOverrideModel {
-
-    /*
-        I plan on making a very comprehensive description on my render / rendering methods, currently I am unable to give a good explanation on each part and will be supplying one later one in development!
-
-        If you are just starting out I don't recommend attempting to create an animated part of your weapon is as much as I can comfortably give at this point!
-    */
     @Override
     public void render(float v, ItemCameraTransforms.TransformType transformType, ItemStack stack, ItemStack parent, LivingEntity entity, MatrixStack matrices, IRenderTypeBuffer renderBuffer, int light, int overlay)
     {
@@ -52,7 +46,7 @@ public class m1014_animation implements IOverrideModel {
                 controller.applySpecialModelTransform(SpecialModels.M1014.getModel(), M1014AnimationController.INDEX_BOLT, transformType, matrices);
                 Gun gun = ((GunItem) stack.getItem()).getGun();
                 float cooldownOg = ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1 : ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
-
+                if(controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.DRAW).equals(controller.getPreviousAnimation())) cooldownOg = 1;
                 if (controller.isAnimationRunning(GunAnimationController.AnimationLabel.INSPECT) || (Gun.hasAmmo(stack) && !controller.isEmpty())/* || controller.isAnimationRunning()*/) {
                     RenderUtil.renderModel(SpecialModels.M1014_SHELL.getModel(), stack, matrices, renderBuffer, light, overlay);
                     // Math provided by Bomb787 on GitHub and Curseforge!!!

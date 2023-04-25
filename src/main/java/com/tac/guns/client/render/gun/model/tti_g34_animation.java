@@ -32,25 +32,7 @@ public class tti_g34_animation implements IOverrideModel {
 
     @Override
     public void render(float partialTicks, ItemCameraTransforms.TransformType transformType, ItemStack stack, ItemStack parent, LivingEntity entity, MatrixStack matrices, IRenderTypeBuffer renderBuffer, int light, int overlay) {
-
-        //matrices.translate(0.01, 0.1, -0.1);
-        //matrices.rotate(Vector3f.YP.rotationDegrees(-0.5F));
-
-        /*
-            // So this area will be tested for the item specific name, allowing the use of custom attachments
-        if(Gun.getAttachment(IAttachment.Type.BARREL,stack).getItem().getName() != "")
-        {
-            RenderUtil.renderModel(SpecialModels.GLOCK_17_SUPPRESSOR_OVERIDE.getModel(), stack, matrices, renderBuffer, light, overlay);
-        }
-
-
-        PROTIP VS CODE, CTRL K CTRL F, REFORMATS THE GLTF FILE INNERS
-        */
-
-        
-
         TtiG34AnimationController controller = TtiG34AnimationController.getInstance();
-        GunItem gunItem = ((GunItem) stack.getItem());
 
         matrices.push();
         {
@@ -95,7 +77,7 @@ public class tti_g34_animation implements IOverrideModel {
             controller.applySpecialModelTransform(SpecialModels.TTI_G34.getModel(), TtiG34AnimationController.INDEX_SLIDE, transformType, matrices);
             Gun gun = ((GunItem) stack.getItem()).getGun();
             float cooldownOg = ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1 : ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
-
+            if(controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.DRAW).equals(controller.getPreviousAnimation())) cooldownOg = 1;
             AnimationMeta reloadEmpty = controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.RELOAD_EMPTY);
             boolean shouldOffset = reloadEmpty != null && reloadEmpty.equals(controller.getPreviousAnimation()) && controller.isAnimationRunning();
             if (Gun.hasAmmo(stack) || shouldOffset) {

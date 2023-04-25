@@ -6,6 +6,7 @@ import com.tac.guns.client.SpecialModels;
 import com.tac.guns.client.handler.ShootingHandler;
 import com.tac.guns.client.render.animation.Ak47AnimationController;
 import com.tac.guns.client.render.animation.RPKAnimationController;
+import com.tac.guns.client.render.animation.module.GunAnimationController;
 import com.tac.guns.client.render.animation.module.PlayerHandAnimation;
 import com.tac.guns.client.render.gun.IOverrideModel;
 import com.tac.guns.client.render.gun.ModelOverrides;
@@ -39,7 +40,7 @@ public class rpk_animation implements IOverrideModel {
         RPKAnimationController controller = RPKAnimationController.getInstance();
         Gun gun = ((GunItem) stack.getItem()).getGun();
         float cooldownOg = ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1 : ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
-        
+        if(controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.DRAW).equals(controller.getPreviousAnimation())) cooldownOg = 1;
         matrices.push();
         {
             controller.applySpecialModelTransform(SpecialModels.RPK.getModel(),RPKAnimationController.INDEX_BODY,transformType,matrices);
@@ -58,18 +59,6 @@ public class rpk_animation implements IOverrideModel {
                 RenderUtil.renderModel(SpecialModels.RPK_BUTT_HEAVY.getModel(), stack, matrices, renderBuffer, light, overlay);
                 matrices.pop();
             }
-            /*if (Gun.getAttachment(IAttachment.Type.BARREL, stack).getItem() == ModItems.SILENCER.orElse(ItemStack.EMPTY.getItem()))
-            {
-                matrices.translate(0, 0, -0.210f);
-
-                RenderUtil.renderModel(SpecialModels.AK47_SILENCER.getModel(), stack, matrices, renderBuffer, light, overlay);
-
-                matrices.translate(0, 0, 0.210f);
-            } else if (Gun.getAttachment(IAttachment.Type.BARREL, stack).getItem() == ModItems.MUZZLE_COMPENSATOR.orElse(ItemStack.EMPTY.getItem())) {
-                RenderUtil.renderModel(SpecialModels.AK47_COMPENSATOR.getModel(), stack, matrices, renderBuffer, light, overlay);
-            } else if (Gun.getAttachment(IAttachment.Type.BARREL, stack).getItem() == ModItems.MUZZLE_BRAKE.orElse(ItemStack.EMPTY.getItem())) {
-                RenderUtil.renderModel(SpecialModels.AK47_BRAKE.getModel(), stack, matrices, renderBuffer, light, overlay);
-            }*/
 
             RenderUtil.renderModel(SpecialModels.RPK.getModel(), stack, matrices, renderBuffer, light, overlay);
         }

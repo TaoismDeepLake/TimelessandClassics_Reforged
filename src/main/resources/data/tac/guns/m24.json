@@ -1,7 +1,7 @@
 {
   "general": {
     "boltAction": true,
-    "rate": 44,
+    "rate": 43,
     "rateSelector": [1],
     "gripType": "tac:two_handed_mosin",
     "recoilAngle": 5.675,
