@@ -590,14 +590,23 @@ public class GunModifiers
         @Override
         public float modifyFireSoundVolume(float volume)
         {
-            return volume * 0.375F;
+            return volume * 0.60F;
         }
 
         @Override
         public double modifyFireSoundRadius(double radius)
         {
-            return radius * 0.225;
+            return radius * 0.275;
         }
+
+        @Override
+        public float modifyFirstShotSpread(float spread)
+        {
+            return spread * 0.875F;
+        }
+
+        @Override
+        public float modifyRecoilSmoothening() {return 1.225F;}
 
         @Override
         public double modifyMuzzleFlashSize(double size)
