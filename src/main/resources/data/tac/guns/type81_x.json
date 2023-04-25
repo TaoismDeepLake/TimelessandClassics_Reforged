@@ -23,7 +23,7 @@
   "projectile": {
     "item":  "tac:762x39",
     "visible": false,
-    "damage": 7.9,
+    "damage": 8,
     "armorIgnore": 1.0,
     "critical": 0.05,
     "criticalDamage": 0.75,

@@ -5,13 +5,13 @@
       "item": {
         "tag": "forge:ingots/iron"
       },
-      "count": 80
+      "count": 70
     },
     {
       "item": {
         "tag": "forge:gems/diamond"
       },
-      "count": 5
+      "count": 2
     }
   ],
   "result": {

@@ -6,10 +6,10 @@
     "gripType": "tac:two_handed_vector",
     "recoilAngle": 1.45,
     "horizontalRecoilAngle": 1.25,
-    "recoilKick": 2.255,
+    "recoilKick": 2,
     "recoilAdsReduction": 0.25,
-    "weaponRecoilOffset": 0.85,
-    "cameraRecoilModifier": 1.1,
+    "weaponRecoilOffset": 0.875,
+    "cameraRecoilModifier": 1.125,
     "recoilDuration": 0.15,
     "weightKilo": 2.3,
 
@@ -23,8 +23,8 @@
   "reloads": {
     "magFed": true,
     "maxAmmo": 22,
-    "reloadMagTimer": 32,
-    "additionalReloadEmptyMagTimer": 10,
+    "reloadMagTimer": 26,
+    "additionalReloadEmptyMagTimer": 8,
     "maxAdditionalAmmoPerOC": [4, 7, 11],
     "preReloadPauseTicks": 8
   },
@@ -37,8 +37,8 @@
     "criticalDamage": 0.625,
     "headDamage": 0.625,
     "size": 0.05,
-    "speed": 13.0,
-    "life": 13,
+    "speed": 15.0,
+    "life": 12,
     "trailLengthMultiplier": 2,
     "ricochet": true
   },
@@ -54,10 +54,10 @@
   },
   "display": {
     "flash": {
-      "yOffset": 8.45,
-      "zOffset": -8.125,
-      "size": 0.5,
-      "trailAdjust": 0.5
+      "yOffset": 8.875,
+      "zOffset": -11.75,
+      "size": 0.75,
+      "trailAdjust": 0.75
     },
     "hipfireScale": 0.60,
     "hipfireMoveScale": 0.675,
@@ -68,7 +68,7 @@
     "zoom": {
       "fovModifier": 0.8,
       "yOffset": 11.665,
-      "zOffset": 0.5
+      "zOffset": 1.5
     },
     "attachments": {
       "barrel": {
@@ -83,7 +83,7 @@
       },
       "pistolScope": {
         "yOffset": 10.05,
-        "zOffset": 0.275,
+        "zOffset": 1.5,
         "scale": 1.0,
         "doRenderMount": true,
         "doOnSlideMovement": false
