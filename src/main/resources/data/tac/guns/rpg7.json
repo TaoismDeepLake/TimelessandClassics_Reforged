@@ -1,6 +1,6 @@
 {
   "general": {
-    "rate": 30,
+    "rate": 200,
     "rateSelector": [1],
     "gripType": "tac:one_handed_m1911",
     "recoilAngle": 3.25,
