@@ -3,9 +3,21 @@
   "materials": [
     {
       "item": {
-        "tag": "forge:ingots/iron"
+        "tag": "forge:materials/legendary"
       },
-      "count": 80
+      "count": 2
+    },
+    {
+      "item": {
+        "tag": "forge:materials/epic"
+      },
+      "count": 7
+    },
+    {
+      "item": {
+        "tag": "forge:materials/rare"
+      },
+      "count": 7
     }
   ],
   "result": {

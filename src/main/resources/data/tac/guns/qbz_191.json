@@ -32,6 +32,10 @@
     "item": "tac:58x42",
     "visible": false,
     "damage": 7,
+    "armorIgnore": 1.0,
+    "critical": 0.05,
+    "criticalDamage": 0.75,
+    "headDamage": 1.0,
     "size": 0.1,
     "speed": 20.5,
     "life": 12,
@@ -79,7 +83,7 @@
       },
       "pistolScope": {
         "yOffset": 9.95,
-        "zOffset": 4.8,
+        "zOffset": 7,
         "scale": 1.0,
         "doRenderMount": true,
         "doOnSlideMovement": false

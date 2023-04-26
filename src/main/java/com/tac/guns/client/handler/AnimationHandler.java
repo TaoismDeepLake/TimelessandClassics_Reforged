@@ -17,6 +17,7 @@ import com.tac.guns.init.ModSyncedDataKeys;
 import com.tac.guns.item.GunItem;
 import com.tac.guns.util.GunEnchantmentHelper;
 
+import com.tac.guns.util.GunModifierHelper;
 import de.javagl.jgltf.model.animation.AnimationRunner;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
@@ -87,6 +88,8 @@ public enum AnimationHandler {
         M92FSAnimationController.getInstance();
         MP9AnimationController.getInstance();
         MK23AnimationController.getInstance();
+        RPG7AnimationController.getInstance();
+        UDP9AnimationController.getInstance();
     }
 
     public void onGunReload(boolean reloading, ItemStack itemStack) {
@@ -95,7 +98,7 @@ public enum AnimationHandler {
         if (itemStack.getItem() instanceof GunItem) {
             GunItem gunItem = (GunItem) itemStack.getItem();
             CompoundNBT tag = itemStack.getOrCreateTag();
-            int reloadingAmount = GunEnchantmentHelper.getAmmoCapacity(itemStack, gunItem.getGun()) - tag.getInt("AmmoCount");
+            int reloadingAmount = GunModifierHelper.getAmmoCapacity(itemStack, gunItem.getGun()) - tag.getInt("AmmoCount");
             if (reloadingAmount <= 0) return;
         }
         GunAnimationController controller = GunAnimationController.fromItem(itemStack.getItem());
@@ -136,7 +139,9 @@ public enum AnimationHandler {
                 if(runner == null) return;
                 float current = runner.getAnimationManager().getCurrentTimeS();
                 float max = runner.getAnimationManager().getMaxEndTimeS();
-                if(max - current <= 0.25f) return;
+                if(!(meta.equals(controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.PUMP)) ||
+                        meta.equals(controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.PULL_BOLT))))
+                    if(max - current <= 0.25f) return;
                 event.setCanceled(true);
             }
         }

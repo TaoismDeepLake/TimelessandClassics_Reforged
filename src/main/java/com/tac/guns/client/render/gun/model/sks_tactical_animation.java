@@ -24,6 +24,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.vector.Vector3f;
+import com.tac.guns.util.GunModifierHelper;
 
 /*
  * Because the revolver has a rotating chamber, we need to render it in a
@@ -41,8 +42,8 @@ public class sks_tactical_animation implements IOverrideModel {
         
         Gun gun = ((GunItem) stack.getItem()).getGun();
         float cooldownOg = ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1 : ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
-
         SKSTacticalAnimationController controller = SKSTacticalAnimationController.getInstance();
+
         matrices.push();
         {
             controller.applySpecialModelTransform(SpecialModels.SKS_TACTICAL.getModel(), SKSTacticalAnimationController.INDEX_BODY,transformType,matrices);
@@ -83,7 +84,7 @@ public class sks_tactical_animation implements IOverrideModel {
         {
             controller.applySpecialModelTransform(SpecialModels.SKS_TACTICAL.getModel(), SKSTacticalAnimationController.INDEX_MAGAZINE,transformType,matrices);
 
-            if(EnchantmentHelper.getEnchantmentLevel(ModEnchantments.OVER_CAPACITY.get(), stack) > 0)
+            if(GunModifierHelper.getAmmoCapacity(stack) > -1)
             {
                 RenderUtil.renderModel(SpecialModels.SKS_TACTICAL_EXTENDED_MAG.getModel(), stack, matrices, renderBuffer, light, overlay);
             }
@@ -108,6 +109,7 @@ public class sks_tactical_animation implements IOverrideModel {
                     matrices.translate(0, 0, 0.245f * (-4.5 * Math.pow(0.5 - 0.5, 2) + 1.0));
                     GunRenderingHandler.get().opticMovement = 0.245f * (-4.5 * Math.pow(cooldownOg - 0.5, 2) + 1.0);
                 }
+                matrices.translate(0, 0, 0.025F);
             }
             RenderUtil.renderModel(SpecialModels.SKS_TACTICAL_BOLT.getModel(), stack, matrices, renderBuffer, light, overlay);
         }

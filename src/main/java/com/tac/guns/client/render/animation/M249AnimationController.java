@@ -8,14 +8,15 @@ import net.minecraft.util.ResourceLocation;
 import java.io.IOException;
 
 public class M249AnimationController extends MachineGunAnimationController {
-    public static int INDEX_BODY = 12;
+    public static int INDEX_BODY = 13;
     public static int INDEX_LEFT_HAND = 0;
     public static int INDEX_RIGHT_HAND = 2;
     public static int INDEX_MAGAZINE = 5;
     public static int INDEX_CHAIN = 4;
     public static int INDEX_CAPS = 7;
     public static int INDEX_HANDLE = 6;
-    public static int INDEX_ROTATE = 8;
+    public static int INDEX_ROTATE = 9;
+    public static int INDEX_IRON = 8;
 
     public static final AnimationMeta STATIC = new AnimationMeta(new ResourceLocation("tac","animations/m249_static.gltf"));
     public static final AnimationMeta RELOAD_NORM = new AnimationMeta(new ResourceLocation("tac","animations/m249_reload_norm.gltf"));

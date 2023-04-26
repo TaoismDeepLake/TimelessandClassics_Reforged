@@ -22,6 +22,7 @@ import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
+import com.tac.guns.util.GunModifierHelper;
 
 /*
  * Because the revolver has a rotating chamber, we need to render it in a
@@ -52,7 +53,7 @@ public class mk23_animation implements IOverrideModel
         matrices.push();
         {
             controller.applySpecialModelTransform(SpecialModels.MK23.getModel(),MK23AnimationController.INDEX_MAG,transformType,matrices);
-            if (EnchantmentHelper.getEnchantmentLevel(ModEnchantments.OVER_CAPACITY.get(), stack) > 0) {
+            if (GunModifierHelper.getAmmoCapacity(stack) > -1) {
                 RenderUtil.renderModel(SpecialModels.MK23_EXTENDED_MAG.getModel(), stack, matrices, renderBuffer, light, overlay);
             } else {
                 RenderUtil.renderModel(SpecialModels.MK23_STANDARD_MAG.getModel(), stack, matrices, renderBuffer, light, overlay);
@@ -77,6 +78,7 @@ public class mk23_animation implements IOverrideModel
                 matrices.translate(0, 0, 0.225f * (-4.5 * Math.pow(0.5 - 0.5, 2) + 1.0));
                 GunRenderingHandler.get().opticMovement = 0.225f * (-4.5 * Math.pow(0.5 - 0.5, 2) + 1.0);
             }
+            matrices.translate(0, 0, 0.025F);
         }
         RenderUtil.renderModel(SpecialModels.MK23_SLIDE.getModel(), stack, matrices, renderBuffer, light, overlay);
         //Always pop
