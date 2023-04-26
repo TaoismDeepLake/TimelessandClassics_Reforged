@@ -1,12 +1,22 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    {
-      "item": "tac:rare_material"
-    }
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#i#",
+    "iXi",
+    "#i#"
   ],
+  "key": {
+    "#": {
+      "tag": "minecraft:planks"
+    },
+    "X": {
+      "item": "minecraft:iron_ingot"
+    },
+    "i": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
   "result": {
-    "item": "tac:uncommon_material",
-    "count": 4
+    "item": "tac:uncommon_material"
   }
 }

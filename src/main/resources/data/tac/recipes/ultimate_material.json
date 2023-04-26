@@ -2,18 +2,21 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "#I#",
-    "IXI",
+    "iXi",
     "#I#"
   ],
   "key": {
     "#": {
-      "tag": "forge:materials/legendary"
+      "item": "minecraft:redstone_block"
     },
     "I": {
-      "item": "minecraft:diamond"
+      "tag": "forge:materials/legendary"
     },
     "X": {
       "item": "minecraft:nether_star"
+    },
+    "i": {
+      "item": "minecraft:netherite_ingot"
     }
   },
   "result": {
