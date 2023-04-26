@@ -34,7 +34,7 @@ public class m82a2_animation implements IOverrideModel {
         M82A2AnimationController controller = M82A2AnimationController.getInstance();
         Gun gun = ((GunItem) stack.getItem()).getGun();
         float cooldownOg = ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1 : ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
-        if(controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.DRAW).equals(controller.getPreviousAnimation())) cooldownOg = 1;
+
         matrices.push();
         {
             controller.applySpecialModelTransform(SpecialModels.M82A2_BODY.getModel(), M82A2AnimationController.INDEX_BODY, transformType, matrices);

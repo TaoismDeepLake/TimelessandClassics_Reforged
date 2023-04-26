@@ -43,7 +43,7 @@ public class sks_tactical_animation implements IOverrideModel {
         Gun gun = ((GunItem) stack.getItem()).getGun();
         float cooldownOg = ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate()) < 0 ? 1 : ShootingHandler.get().getshootMsGap() / ShootingHandler.calcShootTickGap(gun.getGeneral().getRate());
         SKSTacticalAnimationController controller = SKSTacticalAnimationController.getInstance();
-        if(controller.getAnimationFromLabel(GunAnimationController.AnimationLabel.DRAW).equals(controller.getPreviousAnimation())) cooldownOg = 1;
+
         matrices.push();
         {
             controller.applySpecialModelTransform(SpecialModels.SKS_TACTICAL.getModel(), SKSTacticalAnimationController.INDEX_BODY,transformType,matrices);
