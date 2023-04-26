@@ -375,7 +375,7 @@ public class AttachmentContainer extends Container
         ItemStack copyStack = ItemStack.EMPTY;
         Slot slot = this.inventorySlots.get(index);
 
-        if (this.weapon.getItem() instanceof ScopeItem || this.weapon.getItem() instanceof SideRailItem)
+        if (this.weapon.getItem() instanceof ScopeItem)
         {
             if (slot != null && slot.getHasStack()) {
                 ItemStack slotStack = slot.getStack();
