@@ -158,12 +158,12 @@ public class AttachmentContainer extends Container
         if(this.weapon.getItem() instanceof ScopeItem || this.weapon.getItem() instanceof SideRailItem)
         {
             // So this is pretty much me f'ing around with a single enum, likely should just adjust the properties of this enum in order to get the position in Index separately depending on the type of slot, instead of implementation requiring this
-            for (int i = 10; i < IAttachment.Type.values().length; i++)
+            for (int i = 9; i < IAttachment.Type.values().length; i++)
             {
                 int itorationAdjustment = i;
-                if(i==10)
+                if(i==9)
                 {
-                    itorationAdjustment = i-8;
+                    itorationAdjustment = i-7;
                     this.addSlot(new AttachmentSlot(this, this.weaponInventory, this.weapon, IAttachment.Type.SCOPE_RETICLE_COLOR, playerInventory.player, i, 70, 32 + (itorationAdjustment) * 18){
                         @Override
                         public boolean canTakeStack(PlayerEntity playerIn)
@@ -172,9 +172,9 @@ public class AttachmentContainer extends Container
                         }
                     });;
                 }
-                if(i==11)
+                if(i==10)
                 {
-                    itorationAdjustment = i-10;
+                    itorationAdjustment = i-9;
                     this.addSlot(new AttachmentSlot(this, this.weaponInventory, this.weapon, IAttachment.Type.SCOPE_BODY_COLOR, playerInventory.player, i, 40, -1 + (itorationAdjustment) * 18){
                         @Override
                         public boolean canTakeStack(PlayerEntity playerIn)
@@ -183,9 +183,9 @@ public class AttachmentContainer extends Container
                         }
                     });;
                 }
-                if(i==12 /*&& this.weapon.getItem() instanceof ScopeItem*/)
+                if(i==11 /*&& this.weapon.getItem() instanceof ScopeItem*/)
                 {
-                    itorationAdjustment = i-11;
+                    itorationAdjustment = i-10;
                     this.addSlot(new AttachmentSlot(this, this.weaponInventory, this.weapon, IAttachment.Type.SCOPE_GLASS_COLOR, playerInventory.player, i, 10, 50 + (itorationAdjustment) * 18){
                         @Override
                         public boolean canTakeStack(PlayerEntity playerIn)
